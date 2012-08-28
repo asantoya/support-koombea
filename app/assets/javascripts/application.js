@@ -14,3 +14,8 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+$(document).on("ready", function () {
+  setTimeout(function  () {
+    $(".alert").fadeOut("slow")
+  },3000);
+})
