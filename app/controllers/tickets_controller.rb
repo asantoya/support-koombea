@@ -44,9 +44,9 @@ class TicketsController < ApplicationController
   def create
     #@ticket = Ticket.new(params[:ticket])
     @ticket = current_user.tickets.build(params[:ticket])
-
+    @ticket.status = "Process"
+    
     respond_to do |format|
-      p @ticket.save
       if @ticket.save
         format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
         format.json { render json: @ticket, status: :created, location: @ticket }
