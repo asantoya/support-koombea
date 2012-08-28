@@ -14,30 +14,28 @@
   <div class="control-group">
     <%= f.label :subject, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_field :subject, :class => 'text_field input-xlarge' %>
+      <%= f.text_field :subject, :class => 'text_field input-xxlarge' %>
     </div>
   </div>
 
   <div class="control-group">
     <%= f.label :type, :class => 'control-label' %>
-    <div class="controls">
-      <% f.text_field :ticket_type, :class => 'text_field input-xlarge' %>
-      <%= f.select(:ticket_type, options_for_select([['Bug', 'Bug'], ['Fixtures', 'Fixtures']], @ticket.ticket_type), {:class => "input-xlarge"}) %>
+    <div class="controls select">
+      <%= f.select(:ticket_type, options_for_select([['Bug', 'Bug'], ['Features', 'Features']], @ticket.ticket_type), {:class => "input-xxlarge"}) %>
     </div>
   </div>
 
   <div class="control-group">
     <%= f.label :status, :class => 'control-label' %>
-    <div class="controls">
-      <% f.text_field :status, :class => 'text_field input-xlarge' %>
-      <%= f.select(:status, options_for_select([['Process', 'Process'],['Ended', 'Ended'],['Approved', 'Approved'],['Pending', 'Pending']], @ticket.status), {:class => "text_field input-xlarge"} ) %>
+    <div class="controls select">
+      <%= f.select(:status, options_for_select([['Process', 'Process'],['Ended', 'Ended'],['Approved', 'Approved'],['Pending', 'Pending']], @ticket.status), {:class => "text_field input-xxlarge"} ) %>
     </div>
   </div>
 
   <div class="control-group">
     <%= f.label :description, :class => 'control-label' %>
     <div class="controls">
-      <%= f.text_area :description, :class => 'text_field', :rows => "3", :cols => "5" %>
+      <%= f.text_area :description %>
     </div>
   </div>
 

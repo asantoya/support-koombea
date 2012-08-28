@@ -13,6 +13,7 @@
  */
 /*** General ****/
 body { background: url(/assets/main.png); }
+h1 { font-weight: normal !important; }
 .right { float: right;}
 .left {float: left;}
 .center_login {margin: 0 auto;max-width: 300px;}
@@ -47,4 +48,7 @@ body { background: url(/assets/main.png); }
 .ticket .comment .img, .ticket .add-comment .img { display: inline-block; vertical-align: top;}
 .ticket .add-comment .form { display: inline-block;width: 85%;margin: 0 0 0 20px; }
 .ticket .add-comment .form textarea { width: 100%; height: 100px;}
+
+.controls.select select { width: 540px; }
+#ticket_description { width: 530px; height: 100px;}
 
