@@ -6,8 +6,15 @@ SupportKoombea::Application.routes.draw do
 
   devise_for :users
 
-  root :to => "tickets#index"					
-					
+  authenticated :user do
+    root :to => "tickets#index"
+  end
+
+  unauthenticated :user do
+    devise_scope :user do 
+      get "/" => "devise/sessions#new"
+    end
+  end
   resources :tickets do
     resources :comments
   end
