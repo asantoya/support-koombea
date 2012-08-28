@@ -1,0 +1,10 @@
+<div class="comment">
+  <div class="img">
+    <%= image_tag('img.jpg') %>
+  </div>
+  <div class="body">
+    <h3>Review by: <%= comment.user.email %></h3>
+    <span><%= comment.created_at.strftime("%B %e, %Y ") %></span>
+    <p><%= comment.body %></p>
+  </div>
+</div>

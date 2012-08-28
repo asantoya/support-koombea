@@ -4,6 +4,7 @@ gem 'rails', '3.2.7'
 gem 'jquery-rails'
 gem 'devise'
 gem "twitter-bootstrap-rails"
+gem "awesome_print"
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -16,6 +17,7 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'mysql2'
+  gem "factory_girl_rails", "~> 4.0"
 end
 
 group :production do

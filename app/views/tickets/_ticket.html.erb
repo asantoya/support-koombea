@@ -1,0 +1,35 @@
+<div class="ticket">
+  <div class="date">
+    <span class="month"><%= ticket.created_at.strftime(" %b ") %></span>
+    <span class="day"><%= ticket.created_at.strftime(" %d ") %></span>
+  </div>
+  <div class="item">
+
+    <div class="status">
+      <% case ticket.status
+          when "Approved" %>
+            <i class="icon-ok-circle"></i>
+        <% when "Process" %>
+            <i class="icon-cog"></i>
+        <% when "Ended" %>
+            <i class="icon-remove-sign"></i>
+        <% when "Pending" %>
+            <i class="icon-time"></i> 
+      <% end %>
+    </div>
+
+    <h2><%= ticket.subject %></h2>
+
+    <p><%= ticket.description.truncate(300, :omission => ' ...') %></p>
+    
+    <%= link_to t('.show', :default => t("helpers.links.show")), ticket, :class => 'btn btn-mini btn-success' %>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                edit_ticket_path(ticket), :class => 'btn btn-mini' %>
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+                ticket_path(ticket),
+                :method => :delete,
+                :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')),
+                :class => 'btn btn-mini' %>
+  </div>
+  <div class="clear"></div>
+</div>

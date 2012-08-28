@@ -1,0 +1,49 @@
+<%= form_for(@ticket) do |f| %>
+  <% if @ticket.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
+
+      <ul>
+      <% @ticket.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :subject, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :subject, :class => 'text_field input-xlarge' %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :type, :class => 'control-label' %>
+    <div class="controls">
+      <% f.text_field :ticket_type, :class => 'text_field input-xlarge' %>
+      <%= f.select(:ticket_type, options_for_select([['Bug', 'Bug'], ['Fixtures', 'Fixtures']], @ticket.ticket_type), {:class => "input-xlarge"}) %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :status, :class => 'control-label' %>
+    <div class="controls">
+      <% f.text_field :status, :class => 'text_field input-xlarge' %>
+      <%= f.select(:status, options_for_select([['Process', 'Process'],['Ended', 'Ended'],['Approved', 'Approved'],['Pending', 'Pending']], @ticket.status), {:class => "text_field input-xlarge"} ) %>
+    </div>
+  </div>
+
+  <div class="control-group">
+    <%= f.label :description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_area :description, :class => 'text_field', :rows => "3", :cols => "5" %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                tickets_path, :class => 'btn' %>
+  </div>
+<% end %>

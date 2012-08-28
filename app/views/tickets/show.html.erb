@@ -1,0 +1,37 @@
+<div class="ticket">
+  <div class="date">
+    <span class="month"><%= @ticket.created_at.strftime("%b") %></span>
+    <span class="day"><%= @ticket.created_at.strftime("%d") %></span>
+  </div>
+  <div class="item">
+
+    <div class="status">
+      <% case @ticket.status
+          when "Approved" %>
+            <i class="icon-ok-circle"></i>
+        <% when "Process" %>
+            <i class="icon-cog"></i>
+        <% when "Ended" %>
+            <i class="icon-remove-sign"></i>
+        <% when "Pending" %>
+            <i class="icon-time"></i> 
+      <% end %>
+    </div>
+
+    <h2><%= @ticket.subject %></h2>
+
+    <p><%= @ticket.description %></p>
+    
+    <div class="clear"></div>
+  </div>
+
+  <div id="comments">
+    <%= render @ticket.comments %>
+  </div>
+
+  <div class="add-comment">
+    <%= render "comments/form" %>
+  </div>
+
+</div>
+<%= link_to 'Back', tickets_path, :class => "btn" %>

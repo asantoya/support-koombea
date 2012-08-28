@@ -1,0 +1,16 @@
+<div class="img">
+  <%= image_tag('img.jpg') %>
+</div>
+<div class="form">
+  <%= form_for([@ticket, @ticket.comments.build], remote: true, :html => { :multipart => true }) do |f| %>
+
+    <div class="field">
+      <%= f.text_area :body, :size => "0", :placeholder => "Add a comment" %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit 'Add Comment', :class => 'btn btn-primary' %>
+    </div>
+    
+  <% end %>
+</div>
