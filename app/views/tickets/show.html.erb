@@ -20,7 +20,7 @@
 
     <h2><%= @ticket.subject %></h2>
 
-    <p><%= @ticket.description %></p>
+    <p><%= noHtmlTags @ticket.description %></p>
     
     <div class="clear"></div>
   </div>

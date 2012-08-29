@@ -5,6 +5,6 @@
   <div class="body">
     <h3>Review by: <%= comment.user.email %></h3>
     <span><%= comment.created_at.strftime("%B %e, %Y ") %></span>
-    <p><%= comment.body %></p>
+    <p><%= noHtmlTags comment.body %></p>
   </div>
 </div>

@@ -14,8 +14,10 @@
 //= require jquery_ujs
 //= require twitter/bootstrap
 //= require_tree .
+//= require tinymce
 $(document).on("ready", function () {
   setTimeout(function  () {
     $(".alert").fadeOut("slow")
   },3000);
+  $('textarea').addClass("tinymce")
 })

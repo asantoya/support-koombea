@@ -5,6 +5,8 @@ gem 'jquery-rails'
 gem 'devise'
 gem "twitter-bootstrap-rails"
 gem "awesome_print"
+gem 'aasm'
+gem 'tinymce-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.
