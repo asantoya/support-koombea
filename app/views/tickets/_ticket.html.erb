@@ -20,7 +20,7 @@
 
     <h2><%= ticket.subject %></h2>
 
-    <p><%= noHtmlTags ticket.description.gsub(/<\/?[^>]*>/, "").truncate(300, :omission => ' ...') %></p>
+    <p><%= markdown ticket.description.gsub(/<\/?[^>]*>/, "").truncate(300, :omission => ' ...') %></p>
     
     <%= link_to t('.show', :default => t("helpers.links.show")), ticket, :class => 'btn btn-mini btn-success' %>
     <%= link_to t('.edit', :default => t("helpers.links.edit")),

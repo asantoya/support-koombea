@@ -6,7 +6,7 @@ gem 'devise'
 gem "twitter-bootstrap-rails"
 gem "awesome_print"
 gem 'aasm'
-gem 'tinymce-rails'
+gem 'redcarpet'
 gem 'activeadmin'
 gem "meta_search", '>= 1.1.0.pre'
 gem 'sass-rails',   '~> 3.2.3'

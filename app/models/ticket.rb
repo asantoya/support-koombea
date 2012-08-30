@@ -5,7 +5,7 @@ class Ticket < ActiveRecord::Base
 
   include AASM
 
-  attr_accessible :description, :subject, :ticket_type, :status
+  attr_accessible :description, :subject, :ticket_type, :status, :user_id
 
   aasm :column => :status do 
     state :process, :initial => true
@@ -35,5 +35,10 @@ class Ticket < ActiveRecord::Base
     end
     
   end
+
+  def display_name
+    self.subject
+  end
+
 
 end
