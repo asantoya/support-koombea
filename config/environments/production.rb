@@ -48,6 +48,12 @@ SupportKoombea::Application.configure do
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   # config.assets.precompile += %w( search.js )
 
+  #activeadmin needs this to pre compile
+  config.assets.precompile += %w[active_admin.css active_admin.js]
+
+  #activeadmin needs this
+  config.action_mailer.default_url_options = { :host => 'support-koombea.herokuapp.com' }
+
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
 
