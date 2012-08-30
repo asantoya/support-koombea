@@ -7,13 +7,13 @@
 
     <div class="status">
       <% case @ticket.status
-          when "Approved" %>
+          when "approved" %>
             <i class="icon-ok-circle"></i>
-        <% when "Process" %>
+        <% when "process" %>
             <i class="icon-cog"></i>
-        <% when "Ended" %>
+        <% when "ended" %>
             <i class="icon-remove-sign"></i>
-        <% when "Pending" %>
+        <% when "pending" %>
             <i class="icon-time"></i> 
       <% end %>
     </div>
