@@ -51,7 +51,18 @@ class TicketsController < ApplicationController
 
   # GET /tickets/1/edit
   def edit
-    @ticket = Ticket.find(params[:id])
+
+    if current_user.role_id == 1
+      @ticket = Ticket.find(params[:id])  
+    else
+      @ticket = current_user.tickets.find_by_id(params[:id])
+    end
+
+    if @ticket.blank?
+      flash[:error] = "Sorry, ticket is not accessible. Access is denied."
+      redirect_to tickets_path
+    end
+    
   end
 
   # POST /tickets
