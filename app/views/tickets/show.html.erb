@@ -19,6 +19,7 @@
     </div>
 
     <h2><%= @ticket.subject %></h2>
+    <p><span>Client: </span> <%= @ticket.user.email %></p>
 
     <p><%= markdown @ticket.description %></p>
     

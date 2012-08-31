@@ -3,9 +3,11 @@ class Ticket < ActiveRecord::Base
   belongs_to :user
   has_many :comments
 
-  include AASM
-
   attr_accessible :description, :subject, :ticket_type, :status, :user_id
+
+  validates :subject, :description, :ticket_type, :status, :user_id, presence: true
+  
+  include AASM
 
   aasm :column => :status do 
     state :process, :initial => true
@@ -29,9 +31,9 @@ class Ticket < ActiveRecord::Base
   def self.search(status)
 
     if status
-      find(:all, :conditions => ['status LIKE ?', "%#{status}%"] )
+      find(:all, :conditions => ['status LIKE ?', "%#{status}%"], :order => "created_at DESC" )
     else
-      find(:all)
+      find(:all, :order => "created_at DESC")
     end
     
   end

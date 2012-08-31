@@ -3,7 +3,11 @@ class TicketsController < ApplicationController
   # GET /tickets.json
   def index
 
-    @tickets = Ticket.search(params[:status])
+    if current_user.role_id == 1
+      @tickets = Ticket.search(params[:status])
+    else 
+      @tickets = current_user.tickets.search(params[:status])
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -15,10 +19,20 @@ class TicketsController < ApplicationController
   # GET /tickets/1
   # GET /tickets/1.json
   def show
-    @ticket = Ticket.find(params[:id])
 
+    if current_user.role_id == 1
+      @ticket = Ticket.find(params[:id])  
+    else
+      @ticket = current_user.tickets.find_by_id(params[:id])
+    end
+    
     respond_to do |format|
-      format.html # show.html.erb
+      format.html {
+        if @ticket.blank?
+          flash[:error] = "Sorry, ticket is not accessible. Access is denied."
+          redirect_to tickets_path
+        end
+        } 
       format.json { render json: @ticket }
     end
   end
@@ -27,6 +41,7 @@ class TicketsController < ApplicationController
   # GET /tickets/new.json
   def new
     @ticket = Ticket.new
+    @clients = User.where(role_id: 2)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,7 +58,14 @@ class TicketsController < ApplicationController
   # POST /tickets.json
   def create
     #@ticket = Ticket.new(params[:ticket])
-    @ticket = current_user.tickets.build(params[:ticket])
+    @clients = User.where(role_id: 2)
+    
+    if current_user.role_id == 1
+      @ticket = Ticket.new(params[:ticket])
+    else
+      @ticket = current_user.tickets.build(params[:ticket])      
+    end
+
     @ticket.status = "Process"
     
     respond_to do |format|
