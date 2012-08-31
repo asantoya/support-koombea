@@ -1,6 +1,6 @@
 module ApplicationHelper
 
-  def noHtmlTags(text)
+  def toHtmlSafe(text)
     text.html_safe
   end
 

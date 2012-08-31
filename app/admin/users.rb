@@ -26,6 +26,15 @@ ActiveAdmin.register User do
     f.buttons
   end
 
+  show do
+    attributes_table do
+      row :email
+      row :last_sign_in_at
+      row :created_at
+      row :updated_at
+    end
+  end
+
   filter :role
   
 end

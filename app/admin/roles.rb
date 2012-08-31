@@ -12,6 +12,14 @@ ActiveAdmin.register Role do
     end
   end
 
+  show do
+    attributes_table do
+      row :name
+      row :created_at
+      row :updated_at
+    end
+  end
+
   config.clear_sidebar_sections!
   
 end

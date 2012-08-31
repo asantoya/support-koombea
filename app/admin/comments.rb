@@ -4,8 +4,25 @@ ActiveAdmin.register Comment, :as => "TicketComment" do
 
   index do
     column :body do |comment|
-      noHtmlTags comment.body
-    end    
+      toHtmlSafe comment.body
+    end
+    column "" do |ticket|
+      links = link_to "View", admin_ticket_comment_path(ticket), :class => "member_link show_link"
+      links += ''.html_safe
+      links += ''.html_safe
+      links
+    end   
+  end
+
+  show do
+    attributes_table do
+      row :ticket
+      row :user
+      row :created_at
+      row :body do |ticket|
+        toHtmlSafe ticket.body
+      end
+    end
   end
   
 end
