@@ -1,5 +1,5 @@
 class Role < ActiveRecord::Base
-  attr_accessible :role
+  attr_accessible :name
   has_many :users
 
   def display_name
