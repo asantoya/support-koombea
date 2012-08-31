@@ -17,7 +17,7 @@ ActiveAdmin.register Ticket do
     attributes_table do
       row :subject
       row :description do |ticket|
-        toHtmlSafe ticket.description
+        markdown ticket.description
       end
       row :created_at
       row :updated_at
