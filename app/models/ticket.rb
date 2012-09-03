@@ -10,10 +10,10 @@ class Ticket < ActiveRecord::Base
   include AASM
 
   aasm :column => :status do 
-    state :process, :initial => true
+    state :pending, :initial => true
     state :approved
     state :ended
-    state :pending
+    state :process
 
     event :approved do
       transitions :to => :approved, :from => [:process, :pending]
@@ -24,7 +24,7 @@ class Ticket < ActiveRecord::Base
     end
 
     event :pending do
-      transitions :to => :pending, :from => [:process]
+      transitions :to => :process, :from => [:pending]
     end
   end
 
