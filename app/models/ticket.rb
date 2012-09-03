@@ -10,22 +10,32 @@ class Ticket < ActiveRecord::Base
   include AASM
 
   aasm :column => :status do 
-    state :process, :initial => true
-    state :approved
+    state :pending, :initial => true
+    state :process
     state :ended
-    state :pending
+    state :approved
+    state :rejected
 
-    event :approved do
-      transitions :to => :approved, :from => [:process, :pending]
+    event :approve do
+      transitions :to => :approved, :from => [:ended]
     end
 
     event :end do
-      transitions :to => :ended, :from => [:approved, :pending]
+      transitions :to => :ended, :from => [:process]
+    end
+
+    event :process do
+      transitions :to => :process, :from => [:pending,:rejected]
+    end
+
+    event :reject do
+      transitions :to => :rejected, :from => [:ended]
     end
 
     event :pending do
-      transitions :to => :pending, :from => [:process]
-    end
+      transitions :to => :pending, :from => [:rejected]
+    end    
+
   end
 
   def self.search(status)

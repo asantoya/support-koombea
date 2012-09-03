@@ -79,7 +79,8 @@ class TicketsController < ApplicationController
       @ticket = current_user.tickets.build(params[:ticket])      
     end
 
-    @ticket.status = "Process"
+    #this line is not necessary
+    #@ticket.status = "Process"
     
     respond_to do |format|
       if @ticket.save
