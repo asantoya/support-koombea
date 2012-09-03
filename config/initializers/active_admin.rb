@@ -130,4 +130,8 @@ ActiveAdmin.setup do |config|
   #
   # To load a javascript file:
   #   config.register_javascript 'my_javascript.js'
+
+  # == Batch Actions
+  # Enable and disable Batch Actions
+  config.batch_actions = false
 end
