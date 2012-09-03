@@ -52,6 +52,8 @@ class TicketsController < ApplicationController
   # GET /tickets/1/edit
   def edit
 
+    @clients = User.where(role_id: 2)
+
     if current_user.role_id == 1
       @ticket = Ticket.find(params[:id])  
     else

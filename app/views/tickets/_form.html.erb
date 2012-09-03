@@ -47,7 +47,7 @@
     <div class="control-group">
       <%= f.label :user, "Customer", :class => 'control-label' %>
       <div class="controls select">
-        <%= f.select(:user_id, options_from_collection_for_select(@clients, 'id', 'email'), {:include_blank => true }, {:class => "text_field input-xxlarge"} ) %>
+        <%= f.select(:user_id, options_from_collection_for_select(@clients, 'id', 'email', @ticket.user_id), {:include_blank => true }, {:class => "text_field input-xxlarge"} ) %>
       </div>
     </div>
   <% end %> 
