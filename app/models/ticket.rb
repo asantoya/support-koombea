@@ -35,8 +35,10 @@ class Ticket < ActiveRecord::Base
     event :pending do
       transitions :to => :pending, :from => [:rejected]
     end    
-
   end
+
+  STATUS = [['Process', 'process'],['Ended', 'ended'],['Approved', 
+             'approved'],['Pending', 'pending'],['Rejected','rejected']]
 
   def self.search(status)
 
@@ -45,12 +47,9 @@ class Ticket < ActiveRecord::Base
     else
       find(:all, :order => "created_at DESC")
     end
-    
   end
 
   def display_name
     self.subject
   end
-
-
 end
