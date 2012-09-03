@@ -7,7 +7,7 @@ gem "twitter-bootstrap-rails"
 gem "awesome_print"
 gem 'aasm'
 gem 'redcarpet'
-gem 'activeadmin', '0.5.0'
+gem 'activeadmin', '0.4.4'
 gem "meta_search", '>= 1.1.0.pre'
 gem 'sass-rails',   '~> 3.2.3'
 
