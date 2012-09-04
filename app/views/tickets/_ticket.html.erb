@@ -17,7 +17,7 @@
             <i class="icon-time"> <%= ticket.status%></i> 
       <% end %>
     </div>
-  </br>
+    </br>
     <h2><%= ticket.subject %></h2>
 
     <p><%= markdown ticket.description.gsub(/<\/?[^>]*>/, "").truncate(300, :omission => ' ...') %></p>
