@@ -13,6 +13,7 @@ gem 'sass-rails',   '~> 3.2.3'
 gem "omniauth", "~> 1.1.0"
 gem 'omniauth-google-apps', "0.0.1"
 gem "cancan"
+gem "thin"
 
 # Gems used only for assets and not required
 # in production environments by default.
