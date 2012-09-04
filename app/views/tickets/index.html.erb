@@ -1,9 +1,10 @@
 <div class="filters">
   <i><%= link_to 'All', tickets_path, :class => "btn-link", :remote => true %></i>
-  <i class="icon-ok-circle"><%= link_to 'Approved', tickets_path(:status => "Approved"), :class => "btn-link", :remote => true %></i>
-  <i class="icon-cog"><%= link_to 'Process', tickets_path(:status => "Process"), :class => "btn-link", :remote => true %></i>
-  <i class="icon-remove-sign"><%= link_to 'Ended', tickets_path(:status => "Ended"), :class => "btn-link", :remote => true %></i>
-  <i class="icon-time"><%= link_to 'Pending', tickets_path(:status => "Pending"), :class => "btn-link", :remote => true %></i>
+  <i class="icon-ok-circle"><%= link_to 'Approved', tickets_path(:status => "approved"), :class => "btn-link", :remote => true %></i>
+  <i class="icon-cog"><%= link_to 'Process', tickets_path(:status => "process"), :class => "btn-link", :remote => true %></i>
+  <i class="icon-remove-sign"><%= link_to 'Ended', tickets_path(:status => "ended"), :class => "btn-link", :remote => true %></i>
+  <i class="icon-time"><%= link_to 'Pending', tickets_path(:status => "pending"), :class => "btn-link", :remote => true %></i>
+  <i class="icon-remove-circle"><%= link_to 'Rejected', tickets_path(:status => "rejected"), :class => "btn-link", :remote => true %></i>
   <%= link_to 'New Ticket', new_ticket_path, :class => "btn btn-primary" %>
 </div>
 <div id="tickets">

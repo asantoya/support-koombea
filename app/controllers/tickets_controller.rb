@@ -79,7 +79,8 @@ class TicketsController < ApplicationController
       @ticket = current_user.tickets.build(params[:ticket])      
     end
 
-    @ticket.status = "Process"
+    #this line is not necessary
+    #@ticket.status = "Process"
     
     respond_to do |format|
       if @ticket.save
@@ -96,15 +97,26 @@ class TicketsController < ApplicationController
   # PUT /tickets/1.json
   def update
     @ticket = Ticket.find(params[:id])
-
-    respond_to do |format|
-      if @ticket.update_attributes(params[:ticket])
-        format.html { redirect_to tickets_path, notice: 'Ticket was successfully updated.' }
-        format.json { head :no_content }
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @ticket.errors, status: :unprocessable_entity }
+    begin
+      case params[:ticket][:status]
+        when 'ended'
+          @ticket.finish!
+        when 'rejected'
+          @ticket.reject!
+        when 'process'
+          @ticket.process!
+        when 'approved'
+          @ticket.approve!
+        when 'pending'
+          @ticket.pending!
       end
+      params[:ticket].delete(:status)
+      if @ticket.update_attributes(params[:ticket])
+        redirect_to tickets_path, notice: 'Ticket was successfully updated.'
+      end
+    rescue AASM::InvalidTransition
+      flash[:alert] = "you cann't select this state"
+      redirect_to edit_ticket_path(@ticket)
     end
   end
 
