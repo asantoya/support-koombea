@@ -20,7 +20,7 @@ class Ticket < ActiveRecord::Base
       transitions :to => :approved, :from => [:ended]
     end
 
-    event :end do
+    event :finish do
       transitions :to => :ended, :from => [:process]
     end
 

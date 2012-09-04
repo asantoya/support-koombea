@@ -7,17 +7,17 @@
 
     <div class="status">
       <% case ticket.status
-          when "Approved" %>
-            <i class="icon-ok-circle"></i>
-        <% when "Process" %>
-            <i class="icon-cog"></i>
-        <% when "Ended" %>
-            <i class="icon-remove-sign"></i>
-        <% when "Pending" %>
-            <i class="icon-time"></i> 
+          when "approved" %>
+            <i class="icon-ok-circle"> <%= ticket.status%></i>
+        <% when "process" %>
+            <i class="icon-cog"> <%= ticket.status%></i>
+        <% when "ended" %>
+            <i class="icon-remove-sign"> <%= ticket.status%></i>
+        <% when "pending" %>
+            <i class="icon-time"> <%= ticket.status%></i> 
       <% end %>
     </div>
-
+  </br>
     <h2><%= ticket.subject %></h2>
 
     <p><%= markdown ticket.description.gsub(/<\/?[^>]*>/, "").truncate(300, :omission => ' ...') %></p>

@@ -100,7 +100,7 @@ class TicketsController < ApplicationController
     begin
       case params[:ticket][:status]
         when 'ended'
-          @ticket.end!
+          @ticket.finish!
         when 'rejected'
           @ticket.reject!
         when 'process'
@@ -115,7 +115,7 @@ class TicketsController < ApplicationController
         redirect_to tickets_path, notice: 'Ticket was successfully updated.'
       end
     rescue AASM::InvalidTransition
-      flash[:alert] = "you can not select this state"
+      flash[:alert] = "you cann't select this state"
       redirect_to edit_ticket_path(@ticket)
     end
   end
