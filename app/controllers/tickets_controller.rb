@@ -3,7 +3,7 @@ class TicketsController < ApplicationController
   # GET /tickets.json
   def index
 
-    if current_user.role_id == 1
+    if current_user.role == "support"
       @tickets = Ticket.search(params[:status])
     else 
       @tickets = current_user.tickets.search(params[:status])
@@ -20,7 +20,7 @@ class TicketsController < ApplicationController
   # GET /tickets/1.json
   def show
 
-    if current_user.role_id == 1
+    if current_user.role == "support"
       @ticket = Ticket.find(params[:id])  
     else
       @ticket = current_user.tickets.find_by_id(params[:id])
@@ -41,7 +41,8 @@ class TicketsController < ApplicationController
   # GET /tickets/new.json
   def new
     @ticket = Ticket.new
-    @clients = User.where(role_id: 2)
+    @clients = User.where(role: "client")
+    @user = current_user
 
     respond_to do |format|
       format.html # new.html.erb
@@ -51,10 +52,10 @@ class TicketsController < ApplicationController
 
   # GET /tickets/1/edit
   def edit
+    @user = current_user
+    @clients = User.where(role: "client")
 
-    @clients = User.where(role_id: 2)
-
-    if current_user.role_id == 1
+    if current_user.role == "support"
       @ticket = Ticket.find(params[:id])  
     else
       @ticket = current_user.tickets.find_by_id(params[:id])
@@ -70,17 +71,14 @@ class TicketsController < ApplicationController
   # POST /tickets
   # POST /tickets.json
   def create
-    #@ticket = Ticket.new(params[:ticket])
+    
     @clients = User.where(role_id: 2)
     
-    if current_user.role_id == 1
+    if current_user.role == "support"
       @ticket = Ticket.new(params[:ticket])
     else
       @ticket = current_user.tickets.build(params[:ticket])      
     end
-
-    #this line is not necessary
-    #@ticket.status = "Process"
     
     respond_to do |format|
       if @ticket.save
@@ -96,6 +94,9 @@ class TicketsController < ApplicationController
   # PUT /tickets/1
   # PUT /tickets/1.json
   def update
+    @user = current_user
+    authorize! :choose_client, @user if params[:ticket][:choose_client]
+
     @ticket = Ticket.find(params[:id])
     begin
       case params[:ticket][:status]
@@ -115,7 +116,7 @@ class TicketsController < ApplicationController
         redirect_to tickets_path, notice: 'Ticket was successfully updated.'
       end
     rescue AASM::InvalidTransition
-      flash[:alert] = "you cann't select this state"
+      flash[:alert] = "You cann't select this state"
       redirect_to edit_ticket_path(@ticket)
     end
   end
