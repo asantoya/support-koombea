@@ -6,6 +6,7 @@ FactoryGirl.define do
   factory :user do
     email
     password "test123"
+    role "support"
   end
 
   factory :ticket do 

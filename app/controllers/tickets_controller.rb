@@ -72,7 +72,7 @@ class TicketsController < ApplicationController
   # POST /tickets.json
   def create
     
-    @clients = User.where(role_id: 2)
+    @clients = User.where(role: "client")
     
     if current_user.role == "support"
       @ticket = Ticket.new(params[:ticket])
