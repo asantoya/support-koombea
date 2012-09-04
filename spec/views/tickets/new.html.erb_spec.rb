@@ -1,11 +1,14 @@
 require 'spec_helper'
 
 describe "tickets/new" do
+
+  include Devise::TestHelpers
+
   before(:each) do
-    assign(:ticket, stub_model(Ticket,
-      :subject => "MyString",
-      :description => "MyText"
-    ).as_new_record)
+    @ticket = Ticket.new
+    @clients = User.where(role: "client")
+    @user = FactoryGirl.create(:user)
+    sign_in @user
   end
 
   it "renders new ticket form" do

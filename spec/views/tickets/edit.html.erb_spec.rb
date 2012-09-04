@@ -1,8 +1,13 @@
 require 'spec_helper'
 
 describe "tickets/edit" do
+
+  include Devise::TestHelpers
+
   before(:each) do
     @ticket = FactoryGirl.create(:ticket)
+    @user = FactoryGirl.create(:user)
+    sign_in @user
   end
 
   it "renders the edit ticket form" do
