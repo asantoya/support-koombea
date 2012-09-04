@@ -7,6 +7,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     if @user.persisted?
       sign_in_and_redirect @user, :event => :authentication
     else
+      @user.role = "support"
       @user.save
       sign_in_and_redirect @user, :event => :authentication
     end
