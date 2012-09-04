@@ -13,8 +13,21 @@ class User < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   belongs_to :role
 
+  devise :omniauthable
+
   def display_name
     self.email
+  end
+
+  def password_required?
+    (!password.blank?) && super
+  end
+
+  class << self
+    
+    def find_for_google_apps(auth)
+      user = find_or_initialize_by_email(auth["info"]["email"])
+    end
   end
 
 end

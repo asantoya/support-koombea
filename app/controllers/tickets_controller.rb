@@ -3,7 +3,7 @@ class TicketsController < ApplicationController
   # GET /tickets.json
   def index
 
-    if current_user.role_id == 1
+    if current_user
       @tickets = Ticket.search(params[:status])
     else 
       @tickets = current_user.tickets.search(params[:status])
