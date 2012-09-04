@@ -29,6 +29,7 @@ ActiveAdmin.register User do
   show do
     attributes_table do
       row :email
+      row :role
       row :last_sign_in_at
       row :created_at
       row :updated_at
