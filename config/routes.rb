@@ -8,14 +8,14 @@ SupportKoombea::Application.routes.draw do
 
   get "comments/destroy"
 
-  devise_for :users
+  devise_for :users, :controllers => { omniauth_callbacks: "users/omniauth_callbacks" }
 
   authenticated :user do
     root :to => "tickets#index"
   end
 
   unauthenticated :user do
-    devise_scope :user do 
+    devise_scope :user do
       get "/" => "devise/sessions#new"
     end
   end
