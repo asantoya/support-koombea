@@ -12,7 +12,7 @@ FactoryGirl.define do
   factory :ticket do 
     subject "Test"
     description "Test description"
-    status "Ended"
+    status "Pending"
     ticket_type "Bug"
     user
   end
