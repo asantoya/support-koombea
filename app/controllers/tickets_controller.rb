@@ -1,8 +1,6 @@
 class TicketsController < ApplicationController
-  # GET /tickets
-  # GET /tickets.json
-  def index
 
+  def index
     if current_user.role == "support"
       @tickets = Ticket.search(params[:status])
     else 
@@ -16,16 +14,13 @@ class TicketsController < ApplicationController
     end
   end
 
-  # GET /tickets/1
-  # GET /tickets/1.json
   def show
-
     if current_user.role == "support"
-      @ticket = Ticket.find(params[:id])  
+      @ticket = Ticket.find_by_id(params[:id])  
     else
       @ticket = current_user.tickets.find_by_id(params[:id])
     end
-    
+
     respond_to do |format|
       format.html {
         if @ticket.blank?
@@ -37,8 +32,6 @@ class TicketsController < ApplicationController
     end
   end
 
-  # GET /tickets/new
-  # GET /tickets/new.json
   def new
     @ticket = Ticket.new
     @clients = User.where(role: "client")
@@ -50,13 +43,12 @@ class TicketsController < ApplicationController
     end
   end
 
-  # GET /tickets/1/edit
   def edit
     @user = current_user
     @clients = User.where(role: "client")
 
     if current_user.role == "support"
-      @ticket = Ticket.find(params[:id])  
+      @ticket = Ticket.find_by_id(params[:id])  
     else
       @ticket = current_user.tickets.find_by_id(params[:id])
     end
@@ -68,10 +60,7 @@ class TicketsController < ApplicationController
     
   end
 
-  # POST /tickets
-  # POST /tickets.json
-  def create
-    
+  def create   
     @clients = User.where(role: "client")
     
     if current_user.role == "support"
@@ -91,8 +80,6 @@ class TicketsController < ApplicationController
     end
   end
 
-  # PUT /tickets/1
-  # PUT /tickets/1.json
   def update
     @user = current_user
     authorize! :choose_client, @user if params[:ticket][:choose_client]
@@ -121,8 +108,6 @@ class TicketsController < ApplicationController
     end
   end
 
-  # DELETE /tickets/1
-  # DELETE /tickets/1.json
   def destroy
     @ticket = Ticket.find(params[:id])
     @ticket.destroy
