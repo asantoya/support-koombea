@@ -1,5 +1,5 @@
 <div class="filters">
-  <i><%= link_to 'All', tickets_path, :class => "btn-link", :remote => true %></i>
+  <i><%= link_to 'All', root_path, :class => "btn-link", :remote => true %></i>
   <i class="icon-ok-circle"><%= link_to 'Approved', tickets_path(:status => "approved"), :class => "btn-link", :remote => true %></i>
   <i class="icon-cog"><%= link_to 'In Process', tickets_path(:status => "in_process"), :class => "btn-link", :remote => true %></i>
   <i class="icon-remove-sign"><%= link_to 'Ended', tickets_path(:status => "ended"), :class => "btn-link", :remote => true %></i>
@@ -9,5 +9,5 @@
 </div>
 <div id="tickets">
   <%= render @tickets %>
-  <%= will_paginate @tickets %>
 </div>
+<%= will_paginate @tickets %>

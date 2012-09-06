@@ -47,9 +47,9 @@ class Ticket < ActiveRecord::Base
   def self.search(status)
 
     if status
-      find(:all, :conditions => ['status LIKE ?', "%#{status}%"], :order => "created_at DESC" )
+      where(status: status).order("created_at DESC")
     else
-      find(:all, :order => "created_at DESC")
+      order("created_at DESC")
     end
   end
 
