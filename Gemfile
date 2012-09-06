@@ -14,7 +14,7 @@ gem "omniauth", "~> 1.1.0"
 gem 'omniauth-google-apps', "0.0.1"
 gem "cancan"
 gem "thin"
-gem 'will_paginate', '3.0.3'
+gem 'will_paginate'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -27,7 +27,7 @@ group :development, :test do
   gem 'rspec-rails'
   #gem 'pg'
   gem 'mysql2'
-  gem "factory_girl_rails", "~> 4.0"
+  gem "factory_girl_rails", "~> 4.0", require: false
   gem 'simplecov', :require => false
 end
 

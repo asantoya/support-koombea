@@ -5,6 +5,7 @@ require 'rspec/rails'
 require 'rspec/autorun'
 
 require 'simplecov'
+require 'factory_girl_rails'
 SimpleCov.start
 
 
