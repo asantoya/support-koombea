@@ -6,6 +6,7 @@ describe "tickets/edit" do
 
   before(:each) do
     @ticket = FactoryGirl.create(:ticket)
+    @clients = User.where(role: "client")
     @user = FactoryGirl.create(:user)
     sign_in @user
   end
