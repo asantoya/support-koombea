@@ -2,7 +2,9 @@ class TicketMailer < ActionMailer::Base
 
   @users = User.where(role: "support", receives_notifications: true).pluck(:email).join(",")
 
-  default from: "info@koombea.com",
+  ap @users
+
+  default from: "contact@koombea.com",
           to: @users
 
   def new_ticket(ticket)
