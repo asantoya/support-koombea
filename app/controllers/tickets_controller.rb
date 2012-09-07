@@ -20,7 +20,7 @@ class TicketsController < ApplicationController
     else
       @ticket = current_user.tickets.find_by_id(params[:id])
     end
-
+    
     respond_to do |format|
       format.html {
         if @ticket.blank?
@@ -62,15 +62,18 @@ class TicketsController < ApplicationController
 
   def create   
     @clients = User.where(role: "client")
-    
+
     if current_user.role == "support"
       @ticket = Ticket.new(params[:ticket])
     else
       @ticket = current_user.tickets.build(params[:ticket])      
     end
-    
+
     respond_to do |format|
       if @ticket.save
+
+        TicketMailer.new_ticket(@ticket).deliver
+
         format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
         format.json { render json: @ticket, status: :created, location: @ticket }
       else

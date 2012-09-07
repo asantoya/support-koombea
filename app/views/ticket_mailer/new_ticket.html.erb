@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Hello, Support team</h1>
+    
+    <h3>New Ticket created</h3>
+    
+    <p><strong><em>Client: </em></strong><%= @ticket.user.email %></p>
+    <p><strong><em>Subject: </em></strong><%= @ticket.subject %></p>
+    <p><strong><em>Type: </em></strong><%= @ticket.ticket_type.capitalize %></p>
+    <p><strong><em>Description: </em></strong><%= @ticket.description %></p>
+  </body> 
+</html>
