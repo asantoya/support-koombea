@@ -1,6 +1,6 @@
 FactoryGirl.define do
 
   factory :mail do 
-    subject "Test"
+    subject
   end
 end
