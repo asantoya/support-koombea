@@ -5,13 +5,17 @@ class Ticket < ActiveRecord::Base
 
   attr_accessible :description, :subject, :ticket_type, :status, :user_id
 
-  validates :subject, :description, :ticket_type, :status, :user_id, presence: true
+  validates :subject, presence: true
+  validates :description, presence: true
+  validates :ticket_type, presence: true
+  validates :status, presence: true
+  validates :user_id, presence: true
   
   include AASM
 
   aasm :column => :status do 
     state :pending, :initial => true
-    state :process
+    state :in_process
     state :ended
     state :approved
     state :rejected
@@ -21,11 +25,11 @@ class Ticket < ActiveRecord::Base
     end
 
     event :finish do
-      transitions :to => :ended, :from => [:process]
+      transitions :to => :ended, :from => [:in_process]
     end
 
     event :process do
-      transitions :to => :process, :from => [:pending,:rejected]
+      transitions :to => :in_process, :from => [:pending,:rejected]
     end
 
     event :reject do
@@ -37,7 +41,7 @@ class Ticket < ActiveRecord::Base
     end    
   end
 
-  STATUS = [['Process', 'process'],['Ended', 'ended'],['Approved', 
+  STATUS = [['In Process', 'in_process'],['Ended', 'ended'],['Approved', 
              'approved'],['Pending', 'pending'],['Rejected','rejected']]
 
   def self.search(status)
