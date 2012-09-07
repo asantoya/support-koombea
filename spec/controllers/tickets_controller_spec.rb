@@ -150,6 +150,8 @@ describe TicketsController do
       expect{
         post :create, ticket: attrs 
       }.to change{Ticket.count}.by(1)
+      ticket = assigns(:ticket)
+      response.should redirect_to ticket_path(ticket.id)
       flash[:notice].should match("Ticket was successfully created.")
     end
 
