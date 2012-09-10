@@ -91,19 +91,21 @@ class TicketsController < ApplicationController
 
     @ticket = Ticket.find(params[:id])
     begin
-      case params[:ticket][:status]
-        when 'ended'
-          @ticket.finish!
-        when 'rejected'
-          @ticket.reject!
-        when 'process'
-          @ticket.process!
-        when 'approved'
-          @ticket.approve!
-        when 'pending'
-          @ticket.pending!
+      unless params[:ticket][:status] == @ticket.status
+        case params[:ticket][:status]
+          when 'ended'
+            @ticket.finish!
+          when 'rejected'
+            @ticket.reject!
+          when 'in_process'
+            @ticket.process!
+          when 'approved'
+            @ticket.approve!
+          when 'pending'
+            @ticket.pending!
+        end
+        params[:ticket].delete(:status)
       end
-      params[:ticket].delete(:status)
       if @ticket.update_attributes(params[:ticket])
         redirect_to tickets_path, notice: 'Ticket was successfully updated.'
       end
