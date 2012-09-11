@@ -28,6 +28,7 @@ ActiveAdmin.register Ticket do
         ticket.ticket_type.capitalize
       end
       row :user
+      row :assigned_to
     end
   end
 
@@ -38,6 +39,7 @@ ActiveAdmin.register Ticket do
       f.input :description 
       f.input :status, :as => :select, :collection => [['Process', 'process'],['Ended', 'ended'],['Approved', 'approved'],['Pending', 'pending']]
       f.input :ticket_type, :as => :select, :collection => [['Bug', 'bug'], ['Features', 'features']]
+      f.input :assigned_to
     end
 
     f.buttons
