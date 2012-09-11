@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120906204612) do
+ActiveRecord::Schema.define(:version => 20120910214437) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -60,13 +60,15 @@ ActiveRecord::Schema.define(:version => 20120906204612) do
   create_table "tickets", :force => true do |t|
     t.string   "subject"
     t.text     "description"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.string   "status"
     t.string   "ticket_type"
     t.integer  "user_id"
+    t.integer  "assigned_to_id"
   end
 
+  add_index "tickets", ["assigned_to_id"], :name => "index_tickets_on_assigned_to_id"
   add_index "tickets", ["user_id"], :name => "index_tickets_on_user_id"
 
   create_table "users", :force => true do |t|

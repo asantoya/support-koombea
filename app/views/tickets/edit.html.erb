@@ -1,4 +1,22 @@
-<h1>Editing ticket</h1>
+<div class="ticket">
+  <div class="date">
+    <span class="month"><%= @ticket.created_at.strftime("%b") %></span>
+    <span class="day"><%= @ticket.created_at.strftime("%d") %></span>
+  </div>
+  <div class="item">
 
-<%= render 'form' %>
+    <%= render 'form' %>
+    
+    <div class="clear"></div>
+  </div>
 
+  <div id="comments">
+    <%= render @ticket.comments %>
+  </div>
+
+  <div class="add-comment">
+    <%= render "comments/form" %>
+  </div>
+
+</div>
+<%= link_to 'Back', tickets_path, :class => "btn" %>

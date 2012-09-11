@@ -7,6 +7,9 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @ticket.save
+
+        TicketMailer.new_comment(@comment).deliver 
+
         format.js
       else
         redirect_to tickets_path

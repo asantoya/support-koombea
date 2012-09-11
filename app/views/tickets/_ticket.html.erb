@@ -18,14 +18,14 @@
       <% end %>
     </div>
     </br>
-    <h2><%= ticket.subject %></h2>
+    <h2><%= link_to ticket.subject, edit_ticket_path(ticket) %></h2>
 
     <p><%= markdown ticket.description.gsub(/<\/?[^>]*>/, "").truncate(300, :omission => ' ...') %></p>
     
-    <%= link_to t('.show', :default => t("helpers.links.show")), ticket, :class => 'btn btn-mini btn-success' %>
-    <%= link_to t('.edit', :default => t("helpers.links.edit")),
+    <%#= link_to t('.show', :default => t("helpers.links.show")), ticket, :class => 'btn btn-mini btn-success' %>
+    <%#= link_to t('.edit', :default => t("helpers.links.edit")),
                 edit_ticket_path(ticket), :class => 'btn btn-mini' %>
-    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+    <%#= link_to t('.destroy', :default => t("helpers.links.destroy")),
                 ticket_path(ticket),
                 :method => :delete,
                 :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },

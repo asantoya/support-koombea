@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Hello, Support team</h1>
+    
+    <h3>New Comment</h3>
+    
+    <p><strong><em>Client: </em></strong><%= @comment.ticket.user.email %></p>
+    <p><strong><em>Ticket: </em></strong><%= @comment.ticket.subject %></p>
+    <p><strong><em>Comment: </em></strong><%= @comment.body %></p>
+  </body> 
+</html>

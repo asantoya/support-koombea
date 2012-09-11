@@ -11,6 +11,15 @@
     </div>
   <% end %>
 
+  <% if can? :choose_client, @user %>
+    <div class="control-group">
+      <%= f.label :user, "Client", :class => 'control-label' %>
+      <div class="controls select">
+        <%= f.select(:user_id, options_from_collection_for_select(@clients, 'id', 'email', @ticket.user_id), {:include_blank => true }, {:class => "text_field input-xxlarge"} ) %>
+      </div>
+    </div>
+  <% end %>
+
   <div class="control-group">
     <%= f.label :subject, :class => 'control-label' %>
     <div class="controls">
@@ -21,7 +30,7 @@
   <div class="control-group">
     <%= f.label :type, :class => 'control-label' %>
     <div class="controls select">
-      <%= f.select(:ticket_type, options_for_select([['Bug', 'bug'], ['Features', 'features']], @ticket.ticket_type), {:include_blank => true}, {:class => "input-xxlarge"}) %>
+      <%= f.select(:ticket_type, options_for_select(Ticket::TYPE, @ticket.ticket_type), {:include_blank => true}, {:class => "input-xxlarge"}) %>
     </div>
   </div>
 
@@ -43,11 +52,11 @@
     </div>
   </div>
 
-  <% if can? :choose_client, @user %>
+  <% if can? :choose_assigned, @user %>
     <div class="control-group">
-      <%= f.label :user, "Customer", :class => 'control-label' %>
+      <%= f.label :user, "Assigned to", :class => 'control-label' %>
       <div class="controls select">
-        <%= f.select(:user_id, options_from_collection_for_select(@clients, 'id', 'email', @ticket.user_id), {:include_blank => true }, {:class => "text_field input-xxlarge"} ) %>
+        <%= f.select(:user_id, options_from_collection_for_select(@assigned, 'id', 'email', @ticket.assigned_to_id), {:include_blank => true }, {:class => "text_field input-xxlarge"} ) %>
       </div>
     </div>
   <% end %> 

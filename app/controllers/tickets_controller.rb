@@ -6,7 +6,7 @@ class TicketsController < ApplicationController
       @tickets = Ticket.search(params[:status]).paginate(:page => params[:page], :per_page => 10)
 
     else 
-      @tickets = current_user.tickets.search(params[:status])
+      @tickets = current_user.tickets.search(params[:status]).paginate(:page => params[:page], :per_page => 10)
     end
 
     respond_to do |format|
@@ -17,6 +17,7 @@ class TicketsController < ApplicationController
   end
 
   def show
+
     if current_user.role == "support"
       @ticket = Ticket.find_by_id(params[:id])  
     else
@@ -29,8 +30,8 @@ class TicketsController < ApplicationController
           flash[:error] = "Sorry, ticket is not accessible. Access is denied."
           redirect_to tickets_path
         end
+        redirect_to edit_ticket_path(@ticket)
         } 
-      format.json { render json: @ticket }
     end
   end
 
@@ -48,6 +49,7 @@ class TicketsController < ApplicationController
   def edit
     @user = current_user
     @clients = User.where(role: "client")
+    @assigned = User.where(role: "support")
 
     if current_user.role == "support"
       @ticket = Ticket.find_by_id(params[:id])  
@@ -76,7 +78,7 @@ class TicketsController < ApplicationController
 
         TicketMailer.new_ticket(@ticket).deliver
 
-        format.html { redirect_to @ticket, notice: 'Ticket was successfully created.' }
+        format.html { redirect_to edit_ticket_path(@ticket), notice: 'Ticket was successfully created.' }
         format.json { render json: @ticket, status: :created, location: @ticket }
       else
         format.html { render action: "new" }
@@ -88,6 +90,7 @@ class TicketsController < ApplicationController
   def update
     @user = current_user
     authorize! :choose_client, @user if params[:ticket][:choose_client]
+    authorize! :choose_assigned, @user if params[:ticket][:choose_client]
 
     @ticket = Ticket.find(params[:id])
     begin

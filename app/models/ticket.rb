@@ -1,9 +1,10 @@
 class Ticket < ActiveRecord::Base
 
-  belongs_to :user
+  belongs_to :user, class_name: 'User'
+  belongs_to :assigned_to, class_name: 'User'
   has_many :comments
 
-  attr_accessible :description, :subject, :ticket_type, :status, :user_id
+  attr_accessible :description, :subject, :ticket_type, :status, :user_id, :assigned_to_id
 
   validates :subject, presence: true
   validates :description, presence: true
@@ -43,6 +44,8 @@ class Ticket < ActiveRecord::Base
 
   STATUS = [['In Process', 'in_process'],['Ended', 'ended'],['Approved', 
              'approved'],['Pending', 'pending'],['Rejected','rejected']]
+
+  TYPE = [['Bug','bug'],['Features', 'features']]
 
   def self.search(status)
 
