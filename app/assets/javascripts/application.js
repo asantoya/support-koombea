@@ -18,4 +18,7 @@ $(document).on("ready", function () {
   setTimeout(function  () {
     $(".alert").fadeOut("slow")
   },3000);
+  $("#new_comment").submit( function () {
+    $(".loader img").show()
+  })
 })

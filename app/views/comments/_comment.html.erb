@@ -1,6 +1,6 @@
 <div class="comment">
   <div class="img">
-    <%= image_tag('img.jpg') %>
+    <%= image_tag avatar_url(comment.user) %>
   </div>
   <div class="body">
     <h3>Review by: <%= comment.user.email %></h3>

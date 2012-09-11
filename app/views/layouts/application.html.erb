@@ -17,7 +17,7 @@
       <% if user_signed_in? %>
         <div class="btn-group pull-right">
           <a class="btn dropdown-toggle" data-toggle="dropdown">
-            Hi, <span class="username"><%= current_user.email %>.</span>
+            Hi, <%= image_tag avatar_url(current_user), :class => "avatar" %> <span class="username"><%= current_user.email %>.</span>
             <span class="caret"></span>
           </a>
           <ul class="dropdown-menu">

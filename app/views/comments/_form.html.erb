@@ -1,5 +1,5 @@
 <div class="img">
-  <%= image_tag('img.jpg') %>
+  <%= image_tag avatar_url(current_user) %>
 </div>
 <div class="form">
   <%= form_for([@ticket, @ticket.comments.build], remote: true, :html => { :multipart => true }) do |f| %>
@@ -10,6 +10,7 @@
 
     <div class="form-actions">
       <%= f.submit 'Add Comment', :class => 'btn btn-primary' %>
+      <div class="loader"><%= image_tag "ajax-loader.gif" %></div>
     </div>
     
   <% end %>
