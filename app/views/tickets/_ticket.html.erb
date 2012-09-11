@@ -4,32 +4,26 @@
     <span class="day"><%= ticket.created_at.strftime(" %d ") %></span>
   </div>
   <div class="item">
-
+    <h2><%= link_to ticket.subject, edit_ticket_path(ticket) %></h2>
+    <p>
+      <strong>Client: </strong><%= ticket.user.email %>
+      <br>
+      <strong>Assigned to: </strong><%= ticket.assigned_to.email %>
+    </p>
     <div class="status">
       <% case ticket.status
           when "approved" %>
-            <i class="icon-ok-circle"> <%= ticket.status%></i>
+            <i class="icon-ok-circle"> <%= ticket.status.capitalize%></i>
         <% when "process" %>
-            <i class="icon-cog"> <%= ticket.status%></i>
+            <i class="icon-cog"> <%= ticket.status.capitalize%></i>
         <% when "ended" %>
-            <i class="icon-remove-sign"> <%= ticket.status%></i>
+            <i class="icon-remove-sign"> <%= ticket.status.capitalize%></i>
         <% when "pending" %>
-            <i class="icon-time"> <%= ticket.status%></i> 
+            <i class="icon-time"> <%= ticket.status.capitalize%></i> 
       <% end %>
     </div>
-    </br>
-    <h2><%= link_to ticket.subject, edit_ticket_path(ticket) %></h2>
-
     <p><%= markdown ticket.description.gsub(/<\/?[^>]*>/, "").truncate(300, :omission => ' ...') %></p>
     
-    <%#= link_to t('.show', :default => t("helpers.links.show")), ticket, :class => 'btn btn-mini btn-success' %>
-    <%#= link_to t('.edit', :default => t("helpers.links.edit")),
-                edit_ticket_path(ticket), :class => 'btn btn-mini' %>
-    <%#= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                ticket_path(ticket),
-                :method => :delete,
-                :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                :class => 'btn btn-mini' %>
   </div>
   <div class="clear"></div>
 </div>

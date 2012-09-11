@@ -1,6 +1,6 @@
 class Ticket < ActiveRecord::Base
 
-  belongs_to :user, class_name: 'User'
+  belongs_to :user
   belongs_to :assigned_to, class_name: 'User'
   has_many :comments
 
@@ -50,9 +50,9 @@ class Ticket < ActiveRecord::Base
   def self.search(status)
 
     if status
-      where(status: status).order("created_at DESC")
+      where(status: status).includes(:user).order("created_at DESC")
     else
-      order("created_at DESC")
+      order("created_at DESC").includes(:user)
     end
   end
 
