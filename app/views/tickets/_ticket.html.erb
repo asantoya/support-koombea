@@ -11,7 +11,7 @@
       <% if ticket.assigned_to.present? %>
         <strong>Assigned to: </strong><%= ticket.assigned_to.email %>
       <% else %>
-        <strong>There has been assigned</strong>
+        <strong>It hasn't been assigned</strong>
       <% end %>
     </p>
     <div class="status">
