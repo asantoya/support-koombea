@@ -8,7 +8,9 @@
     <p>
       <strong>Client: </strong><%= ticket.user.email %>
       <br>
-      <strong>Assigned to: </strong><%= ticket.assigned_to.email %>
+      <% if ticket.assigned_to.present? %>
+        <strong>Assigned to: </strong><%= ticket.assigned_to.email %>
+      <% end %>
     </p>
     <div class="status">
       <% case ticket.status
