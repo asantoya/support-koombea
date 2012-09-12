@@ -2,16 +2,20 @@ ActiveAdmin.register Ticket do
 
   index do
     column :subject
-    column :updated_at
+    column :updated_at do |t|
+      t.updated_at.strftime("%b %e, %Y")
+    end
     column "Status", :status
-    column :ticket_type do |ticket|
+    column "Type", :ticket_type do |ticket|
       ticket.ticket_type.capitalize
     end
+    column :assigned_to
 
     default_actions 
   end
 
-  filter :user, :title => :display_name
+  filter :user, label: "Client", collection: User.where(role: "client")
+  filter :assigned_to, collection: User.where(role: "support")
 
   show do
     attributes_table do
@@ -34,12 +38,12 @@ ActiveAdmin.register Ticket do
 
   form do |f|
     f.inputs "Tickets" do
-      f.input :user
+      f.input :user, collection: User.where(role: "client")
       f.input :subject
       f.input :description 
       f.input :status, :as => :select, :collection => [['Process', 'process'],['Ended', 'ended'],['Approved', 'approved'],['Pending', 'pending']]
       f.input :ticket_type, :as => :select, :collection => [['Bug', 'bug'], ['Features', 'features']]
-      f.input :assigned_to
+      f.input :assigned_to, collection: User.where(role: "support")
     end
 
     f.buttons
