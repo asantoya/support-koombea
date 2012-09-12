@@ -11,8 +11,8 @@ class TicketMailer < ActionMailer::Base
   end
 
   def new_comment(comment)
-    @users = User.where(role: "support", receives_notifications: true).pluck(:email).join(",")
     @comment = comment
+    @users = [@comment.ticket.assigned_to.email, @comment.ticket.user.email ].join(",")
 
     mail(to: @users, subject: "New Comment")
   end

@@ -12,6 +12,7 @@ class CommentsController < ApplicationController
 
         format.js
       else
+        flash[:error] = "The comment could not be saved, please try again."
         redirect_to tickets_path
       end
     end

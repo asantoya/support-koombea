@@ -89,7 +89,7 @@ class TicketsController < ApplicationController
   def update
     @user = current_user
     authorize! :choose_client, @user if params[:ticket][:choose_client]
-    authorize! :choose_assigned, @user if params[:ticket][:choose_client]
+    authorize! :choose_assigned, @user if params[:ticket][:choose_assigned]
 
     @ticket = Ticket.find(params[:id])
     begin
@@ -112,7 +112,7 @@ class TicketsController < ApplicationController
         redirect_to tickets_path, notice: 'Ticket was successfully updated.'
       end
     rescue AASM::InvalidTransition
-      flash[:alert] = "You cann't select this state"
+      flash[:alert] = "You can't select this state"
       redirect_to edit_ticket_path(@ticket)
     end
   end
