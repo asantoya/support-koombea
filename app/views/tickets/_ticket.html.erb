@@ -17,13 +17,13 @@
     <div class="status">
       <% case ticket.status
           when "approved" %>
-            <i class="icon-ok-circle"> <%= ticket.status.capitalize%></i>
-        <% when "process" %>
-            <i class="icon-cog"> <%= ticket.status.capitalize%></i>
+            <i class="icon-ok-circle"> Approved </i>
+        <% when "in_process" %>
+            <i class="icon-cog"> In process</i>
         <% when "ended" %>
-            <i class="icon-remove-sign"> <%= ticket.status.capitalize%></i>
+            <i class="icon-remove-sign"> Ended </i>
         <% when "pending" %>
-            <i class="icon-time"> <%= ticket.status.capitalize%></i> 
+            <i class="icon-time"> Pending </i> 
       <% end %>
     </div>
     <p><%= markdown ticket.description.gsub(/<\/?[^>]*>/, "").truncate(300, :omission => ' ...') %></p>

@@ -21,4 +21,5 @@ $(document).on("ready", function () {
   $("#new_comment").submit( function () {
     $(".loader img").show()
   })
+  $(".pagination").find("a").attr("data-remote", true);
 })
