@@ -22,7 +22,7 @@ ActiveAdmin.register User do
       f.input :email
       f.input :password
       f.input :password_confirmation
-      f.input :role
+      f.input :role, as: :select, collection: [['Client', 'client'], ['Support', 'support']] 
       f.input :receives_notifications
     end
 
