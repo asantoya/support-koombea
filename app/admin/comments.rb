@@ -15,11 +15,6 @@ ActiveAdmin.register Comment, :as => "TicketComment" do
     end   
   end
 
-  filter :ticket
-  filter :user, label: "Client", collection: User.where(role: "client")
-  filter :created_at
-  filter :updated_at
-
   show do
     attributes_table do
       row :ticket
