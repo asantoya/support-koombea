@@ -1,5 +1,7 @@
 ActiveAdmin.register Ticket do
 
+  config.per_page = 10
+
   index do
     column :subject
     column :updated_at do |t|

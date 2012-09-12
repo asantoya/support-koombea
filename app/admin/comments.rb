@@ -1,6 +1,7 @@
 ActiveAdmin.register Comment, :as => "TicketComment" do
 
   menu :label => "Comments", :parent => "Tickets"
+  config.per_page = 10
 
   index do
     column :body do |comment|
