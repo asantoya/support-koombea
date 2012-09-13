@@ -109,10 +109,10 @@ class TicketsController < ApplicationController
           when 'pending'
             @ticket.pending!
         end
-        TicketMailer.state_change(@ticket, params[:ticket][:status], @user).deliver
         params[:ticket].delete(:status)
       end
       if @ticket.update_attributes(params[:ticket])
+        TicketMailer.state_change(@ticket, @user).deliver unless params[:ticket][:status] == @ticket.status 
         redirect_to tickets_path, notice: 'Ticket was successfully updated.'
       end
     rescue AASM::InvalidTransition

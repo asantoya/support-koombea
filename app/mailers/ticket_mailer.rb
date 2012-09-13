@@ -17,23 +17,10 @@ class TicketMailer < ActionMailer::Base
     mail(to: @users, subject: "New Comment")
   end
 
-  def state_change(ticket, status, user)
+  def state_change(ticket, user)
     @ticket = ticket
-    @users_mail = [@ticket.assigned_to.email, @ticket.user.email].join(",") 
     @user = user
-
-    case status
-      when "approved"
-        @status = "APPROVED"
-      when "in_process"
-        @status = "IN PROCESS"
-      when "ended"
-        @status = "ENDED"
-      when "pending"
-        @status = "PENDING"
-      when "rejected"
-          @status = "REJECTED"          
-    end
+    @users_mail = [@ticket.user.email, @ticket.assigned_to.email]
   
     mail(to: @users_mail, subject: "State change in a ticket")
   end
