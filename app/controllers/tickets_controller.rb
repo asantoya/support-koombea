@@ -63,9 +63,7 @@ class TicketsController < ApplicationController
     
   end
 
-  def create   
-    @clients = User.where(role: "client")
-
+  def create 
     if current_user.role == "support"
       @ticket = Ticket.new(params[:ticket])
     else
@@ -80,7 +78,12 @@ class TicketsController < ApplicationController
         format.html { redirect_to edit_ticket_path(@ticket), notice: 'Ticket was successfully created.' }
         format.json { render json: @ticket, status: :created, location: @ticket }
       else
-        format.html { render action: "new" }
+        format.html { 
+          @clients = User.where(role: "client")
+          @assigned = User.where(role: "support")
+          @user = current_user
+          render action: "new" 
+        }
         format.json { render json: @ticket.errors, status: :unprocessable_entity }
       end
     end
@@ -106,6 +109,7 @@ class TicketsController < ApplicationController
           when 'pending'
             @ticket.pending!
         end
+        TicketMailer.state_change(@ticket, params[:ticket][:status], @user).deliver
         params[:ticket].delete(:status)
       end
       if @ticket.update_attributes(params[:ticket])

@@ -10,7 +10,7 @@ class Ticket < ActiveRecord::Base
   validates :description, presence: true
   validates :ticket_type, presence: true
   validates :status, presence: true
-  validates :user_id, presence: true
+  validates :user_id, presence: { message: "Client can't be blank" }
   
   include AASM
 

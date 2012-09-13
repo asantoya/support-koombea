@@ -24,6 +24,8 @@
             <i class="icon-remove-sign"> Ended </i>
         <% when "pending" %>
             <i class="icon-time"> Pending </i> 
+        <% when "rejected" %>
+            <i class="icon-remove-circle"> Rejected </i> 
       <% end %>
     </div>
     <p><%= markdown ticket.description.gsub(/<\/?[^>]*>/, "").truncate(300, :omission => ' ...') %></p>
