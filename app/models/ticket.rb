@@ -1,5 +1,7 @@
 class Ticket < ActiveRecord::Base
 
+  after_create :mail_new_ticket
+
   belongs_to :user
   belongs_to :assigned_to, class_name: 'User'
   has_many :comments
@@ -58,5 +60,9 @@ class Ticket < ActiveRecord::Base
 
   def display_name
     self.subject
+  end
+
+  def mail_new_ticket
+    TicketMailer.new_ticket(self).deliver
   end
 end

@@ -27,8 +27,9 @@ class TicketsController < ApplicationController
         if @ticket.blank?
           flash[:error] = "Sorry, ticket is not accessible. Access is denied."
           redirect_to tickets_path
+        else
+          redirect_to edit_ticket_path(@ticket)
         end
-        redirect_to edit_ticket_path(@ticket)
         } 
     end
   end
@@ -72,9 +73,6 @@ class TicketsController < ApplicationController
 
     respond_to do |format|
       if @ticket.save
-
-        TicketMailer.new_ticket(@ticket).deliver
-
         format.html { redirect_to edit_ticket_path(@ticket), notice: 'Ticket was successfully created.' }
         format.json { render json: @ticket, status: :created, location: @ticket }
       else
