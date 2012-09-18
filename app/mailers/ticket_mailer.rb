@@ -2,12 +2,11 @@ class TicketMailer < ActionMailer::Base
 
   default from: "contact@koombea.com"
 
-  def new_ticket(ticket)
-    @users = User.where(role: "support", receives_notifications: true).pluck(:email).join(",")
-
+  def new_ticket(ticket, users)
+    @users = users
     @ticket = ticket
-
     mail(to: @users, subject: "New Ticket created")
+
   end
 
   def new_comment(comment)

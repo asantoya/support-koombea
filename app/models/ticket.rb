@@ -1,7 +1,5 @@
 class Ticket < ActiveRecord::Base
 
-  after_create :mail_new_ticket
-
   belongs_to :user
   belongs_to :assigned_to, class_name: 'User'
   has_many :comments
@@ -48,6 +46,8 @@ class Ticket < ActiveRecord::Base
              'approved'],['Pending', 'pending'],['Rejected','rejected']]
 
   TYPE = [['Bug','bug'],['Features', 'features']]
+  
+  after_create :mail_new_ticket
 
   def self.search(status)
 
