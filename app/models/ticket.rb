@@ -63,6 +63,9 @@ class Ticket < ActiveRecord::Base
   end
 
   def mail_new_ticket
-    TicketMailer.new_ticket(self).deliver
+    @users = User.where(role: "support", receives_notifications: true).pluck(:email).join(",")
+    if @users.present?
+      TicketMailer.new_ticket(self, @users).deliver
+    end
   end
 end

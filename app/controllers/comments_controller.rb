@@ -7,16 +7,12 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @ticket.save
-
-        TicketMailer.new_comment(@comment).deliver 
-
-        format.js
+        @success = "The comment was saved successfully."
       else
-        flash[:error] = "The comment could not be saved, please try again."
-        redirect_to tickets_path
+        @error = "There was an error while saving the comment. Please, check the fields."
       end
+      format.js
     end
-
   end
-  
+
 end

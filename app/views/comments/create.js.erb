@@ -1,3 +1,15 @@
-$("#comments").html("<%= j(render @ticket.comments )%>");
-$("#comment_body").val("");
-$(".loader img").hide("slow")
+<% if @success.present? %>
+  $("#msg_comment").removeClass('alert-error').addClass("alert-success").html('<%= @success %>').show()
+  $("#comments").html("<%= j(render @ticket.comments )%>");
+  $("#comment_body").val("");
+  $(".loader img").hide("slow")
+  setTimeout(function  () {
+    $(".alert").fadeOut("slow")
+  },3000);
+<% else %>
+  $("#msg_comment").removeClass('alert-success').addClass("alert-error").html('<%= @error %>').show()
+  $(".loader img").hide("slow")
+  setTimeout(function  () {
+    $(".alert").fadeOut("slow")
+  },3000);
+<% end %>
