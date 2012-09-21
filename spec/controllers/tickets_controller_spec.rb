@@ -6,7 +6,7 @@ describe TicketsController do
 
   describe "#index" do
     it "assigns all tickets as @tickets when the user has the role 'support'." do
-      @user = FactoryGirl.create(:user, :support)
+      @user = FactoryGirl.create(:support_user)
       sign_in @user
       tickets = 5.times.map{ FactoryGirl.create(:ticket)}
       get :index, {}
@@ -14,8 +14,8 @@ describe TicketsController do
     end
 
     it "assigns all tickets as @tickets when the user has the role 'client'." do
-      @client = FactoryGirl.create(:user, :client)
-      @customer = FactoryGirl.create(:user, :client)
+      @client = FactoryGirl.create(:client_user)
+      @customer = FactoryGirl.create(:client_user)
       sign_in @client
       
       ticketsClient = 5.times.map{ FactoryGirl.create(:ticket, user: @client)}
@@ -27,52 +27,18 @@ describe TicketsController do
   end
 
   describe "#show" do
-    it "should show any ticket when the user has the role 'support'." do
-      @user = FactoryGirl.create(:user, :support)
+    it "should redirect to edit" do
+      @user = FactoryGirl.create(:support_user)
       sign_in @user
       ticket = FactoryGirl.create(:ticket)
       get :show, { id: ticket }
-      assigns(:ticket).should eq(ticket)
-    end
-
-    it "should show your own ticket when the user has the role 'client'." do
-      @client = FactoryGirl.create(:user, :client)
-      @customer = FactoryGirl.create(:user, :client)
-      sign_in @client
-
-      ticketClient = FactoryGirl.create(:ticket, user: @client)
-      ticketCustomer = FactoryGirl.create(:ticket, user: @customer)
-      get :show, { id: ticketClient }
-      assigns(:ticket).should eq(ticketClient)
-    end
-
-    it "should redirect to tickets path with flash error if can't access to ticket" do
-      @client = FactoryGirl.create(:user, :client)
-      @customer = FactoryGirl.create(:user, :client)
-      sign_in @client
-
-      ticketClient = FactoryGirl.create(:ticket, user: @client)
-      ticketCutomer = FactoryGirl.create(:ticket, user: @customer)
-      get :show, { id: ticketCutomer }
-      
-      response.should redirect_to tickets_path
-      flash[:error].should match("Sorry, ticket is not accessible. Access is denied.")
-    end
-
-    it "should redirect to tickets path with flash error if the ticket id is invalid" do
-      @user = FactoryGirl.create(:user, :support)
-      sign_in @user
-
-      get :show, { id: 999 }
-
-      response.should redirect_to tickets_path
-      flash[:error].should_not be_nil
+      response.should redirect_to edit_ticket_path(ticket)
     end
   end
 
   describe "#edit" do
     it "should show form ticket when the user has the role 'support'." do
-      @user = FactoryGirl.create(:user, :support)
+      @user = FactoryGirl.create(:support_user)
       sign_in @user
       ticket = FactoryGirl.create(:ticket)
       get :edit, { id: ticket }
@@ -80,8 +46,8 @@ describe TicketsController do
     end
 
     it "should show your own form ticket when the user has the role 'client'." do
-      @client = FactoryGirl.create(:user, :client)
-      @customer = FactoryGirl.create(:user, :client)
+      @client = FactoryGirl.create(:client_user)
+      @customer = FactoryGirl.create(:client_user)
       sign_in @client
 
       ticketClient = FactoryGirl.create(:ticket, user: @client)
@@ -91,8 +57,8 @@ describe TicketsController do
     end
 
     it "should redirect to tickets path with flash error if can't access to ticket" do
-      @client = FactoryGirl.create(:user, :client)
-      @customer = FactoryGirl.create(:user, :client)
+      @client = FactoryGirl.create(:client_user)
+      @customer = FactoryGirl.create(:client_user)
       sign_in @client
 
       ticketClient = FactoryGirl.create(:ticket, user: @client)
@@ -104,7 +70,7 @@ describe TicketsController do
     end
 
     it "should redirect to tickets path with flash error if the ticket id is invalid" do
-      @user = FactoryGirl.create(:user, :support)
+      @user = FactoryGirl.create(:support_user)
       sign_in @user
 
       get :edit, { id: 999 }
@@ -114,7 +80,7 @@ describe TicketsController do
     end
 
     it "should assign the curren user to @user" do
-      @user = FactoryGirl.create(:user, :support)
+      @user = FactoryGirl.create(:support_user)
       ticket = FactoryGirl.create(:ticket, user: @user)
       sign_in @user
       get :edit, { id: ticket}
@@ -122,10 +88,10 @@ describe TicketsController do
     end
 
     it "should assign all users with role 'client' to @clients" do
-      @user = FactoryGirl.create(:user, :support)
+      @user = FactoryGirl.create(:support_user)
       ticket = FactoryGirl.create(:ticket, user: @user)
       sign_in @user
-      clients = 5.times.map { FactoryGirl.create(:user, :client)  }
+      clients = 5.times.map { FactoryGirl.create(:client_user)  }
       get :edit, { id: ticket}
       assigns(:clients).should eq(clients)
     end 
@@ -133,16 +99,16 @@ describe TicketsController do
 
   describe "#create" do
     it "should assign all users with role 'client' to @clients" do
-      @user = FactoryGirl.create(:user, :support)
+      @user = FactoryGirl.create(:support_user)
       ticket = FactoryGirl.create(:ticket, user: @user)
       sign_in @user
-      clients = 5.times.map { FactoryGirl.create(:user, :client)  }
+      clients = 5.times.map { FactoryGirl.create(:client_user)  }
       post :create, { id: ticket}
       assigns(:clients).should eq(clients)
     end
 
     it "should save ticket" do
-      @user = FactoryGirl.create(:user, :client)
+      @user = FactoryGirl.create(:client_user)
       sign_in @user
 
       attrs = FactoryGirl.attributes_for(:ticket, user: @user)
@@ -151,7 +117,7 @@ describe TicketsController do
         post :create, ticket: attrs 
       }.to change{Ticket.count}.by(1)
       ticket = assigns(:ticket)
-      response.should redirect_to ticket_path(ticket.id)
+      response.should redirect_to edit_ticket_path(ticket.id)
       flash[:notice].should match("Ticket was successfully created.")
     end
 
@@ -159,7 +125,7 @@ describe TicketsController do
 
   describe 'DELETE destroy' do
     it "should delete the ticket" do
-      @user = FactoryGirl.create(:user, :client)
+      @user = FactoryGirl.create(:client_user)
       sign_in @user
       @ticket = FactoryGirl.create(:ticket, user: @user)
      

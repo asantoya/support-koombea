@@ -3,7 +3,6 @@ require 'spec_helper'
 describe "tickets/index" do
   before(:each) do
     @ticket = FactoryGirl.create(:ticket)
-    @tickets = [@ticket]
   end
 
   it "renders a list of tickets" do

@@ -7,7 +7,8 @@ describe "tickets/new" do
   before(:each) do
     @ticket = Ticket.new
     @clients = User.where(role: "client")
-    @user = FactoryGirl.create(:user)
+    @assigned = User.where(role: "support")
+    @user = FactoryGirl.create(:support_user)
     sign_in @user
   end
 

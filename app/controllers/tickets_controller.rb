@@ -50,15 +50,17 @@ class TicketsController < ApplicationController
     @user = current_user
     @clients = User.where(role: "client")
     @assigned = User.where(role: "support")
-
+    
     if current_user.role == "support"
       @ticket = Ticket.find_by_id(params[:id])  
     else
       @ticket = current_user.tickets.find_by_id(params[:id])
     end
 
+    @comments = @ticket.comments.includes(:documents)
+
     if @ticket.blank?
-      flash[:error] = "Sorry, ticket is not accessible. Access is denied."
+      flash[:error] = "Sorry, ticket is not accessible. Access denied."
       redirect_to tickets_path
     end
     

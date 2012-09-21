@@ -3,7 +3,7 @@
 
 /*** General ****/
 body { background: url(/assets/main.png); }
-h1, h2 { font-weight: normal !important; }
+h1, h2, h3, h4 { font-weight: normal !important; }
 .right { float: right;}
 .left {float: left;}
 .loader { display: inline-block; }
@@ -45,4 +45,5 @@ img.avatar { width: 20px;border-radius: 100px; }
 .controls.select select { width: 540px; }
 #ticket_description { width: 530px; height: 100px;}
 #msg_comment { display: none;width: 82%;margin: 0 0 20px 100px; }
-
+.field input { display:block; margin: 0 0 0 20px; }
+.add_fields { display: block; width: 50px;margin: 0 0 0 20px;}

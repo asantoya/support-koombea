@@ -8,7 +8,9 @@
     <div class="field">
       <%= f.text_area :body, :size => "0", :placeholder => "Add a comment" %>
     </div>
-
+    
+    <%= link_to_add_input_fields "Add Files", f, :documents %>
+    
     <div class="form-actions">
       <%= f.submit 'Add Comment', :class => 'btn btn-primary' %>
       <div class="loader"><%= image_tag "ajax-loader.gif" %></div>

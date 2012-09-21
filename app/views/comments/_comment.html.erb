@@ -6,5 +6,15 @@
     <h3>Review by: <%= comment.user.email %></h3>
     <span><%= comment.created_at.strftime("%B %e, %Y ") %></span>
     <p><%= markdown comment.body %></p>
+
+    <% if comment.documents.present? %>
+      <div class="files" >
+        <h4>Attachments: </h4><br>
+        <% comment.documents.each do |d| %> 
+          <%= link_to d.document_identifier, d.document_url %><br>
+        <% end %>
+      </div>
+    <% end %>
+
   </div>
 </div>

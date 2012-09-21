@@ -3,6 +3,7 @@
   $("#comments").html("<%= j(render @ticket.comments )%>");
   $("#comment_body").val("");
   $(".loader img").hide("slow")
+  $(".fileupload").val("")
   setTimeout(function  () {
     $(".alert").fadeOut("slow")
   },3000);

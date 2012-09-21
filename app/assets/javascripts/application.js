@@ -12,14 +12,24 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.remotipart
 //= require twitter/bootstrap
 //= require_tree .
 $(document).on("ready", function () {
   setTimeout(function  () {
     $(".alert").fadeOut("slow")
   },3000);
+
   $("#new_comment").submit( function () {
     $(".loader img").show()
   })
+
   $(".pagination").find("a").attr("data-remote", true);
+
+  $(".add_fields").on("click", function (event) {
+    time = new Date().getTime()
+    regexp = new RegExp($(this).data('id'), 'g')
+    $(this).before($(this).data('fields').replace(regexp, time))
+    event.preventDefault()
+  })
 })
