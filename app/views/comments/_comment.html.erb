@@ -10,9 +10,13 @@
     <% if comment.documents.present? %>
       <div class="files" >
         <h4>Attachments: </h4><br>
-        <% comment.documents.each do |d| %> 
-          <%= link_to d.document_identifier, d.document_url %><br>
+        <ul>
+          <% comment.documents.each do |d| %> 
+            <li>  
+              <%= link_to d.document_identifier, d.document_url, target: "_blank", class: "icon " + d.icon_extension %>
+            </li>
         <% end %>
+        </ul>
       </div>
     <% end %>
 

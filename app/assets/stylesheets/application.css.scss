@@ -47,3 +47,10 @@ img.avatar { width: 20px;border-radius: 100px; }
 #msg_comment { display: none;width: 82%;margin: 0 0 20px 100px; }
 .field input { display:block; margin: 0 0 0 20px; }
 .add_fields { display: block; width: 50px;margin: 0 0 0 20px;}
+.files ul { list-style: none; margin-left: 0  }
+.files .icon { background: url(/assets/icon_files.png) no-repeat; padding-left: 25px;margin: 0 0 5px;}
+.files .img { background-position: 3px 0px; }
+.files .pdf { background-position: 3px -32px; }
+.files .doc { background-position: 3px -63px; }
+.files .xls { background-position: 3px -94px; }
+.files .mul { background-position: -63px }

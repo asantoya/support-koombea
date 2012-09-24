@@ -2,7 +2,6 @@
 
 class DocumentUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
-  #include CarrierWave::MimeTypes
 
   storage :file
   def store_dir

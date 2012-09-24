@@ -8,7 +8,7 @@ class Comment < ActiveRecord::Base
 
   validates :body, presence: true
 
-  #after_create :mail_new_comment
+  after_create :mail_new_comment
 
   def mail_new_comment
     begin
