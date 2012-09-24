@@ -11,8 +11,10 @@ class TicketMailer < ActionMailer::Base
 
   def new_comment(comment)
     @comment = comment
-    @users = [@comment.ticket.assigned_to.email, @comment.ticket.user.email ].join(",")
 
+    @users = [@comment.ticket.user.email]
+    @users << @comment.ticket.assigned_to.email if @comment.ticket.assigned_to.present?
+    
     mail(to: @users, subject: "New Comment")
   end
 
