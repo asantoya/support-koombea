@@ -75,6 +75,7 @@ class TicketsController < ApplicationController
 
     respond_to do |format|
       if @ticket.save
+        TicketMailer.assigned_to(@ticket).deliver if @ticket.assigned_to.present?
         format.html { redirect_to edit_ticket_path(@ticket), notice: 'Ticket was successfully created.' }
         format.json { render json: @ticket, status: :created, location: @ticket }
       else
@@ -93,7 +94,6 @@ class TicketsController < ApplicationController
     @user = current_user
     authorize! :choose_client, @user if params[:ticket][:choose_client]
     authorize! :choose_assigned, @user if params[:ticket][:choose_assigned]
-
     @ticket = Ticket.find(params[:id])
     begin
       unless params[:ticket][:status] == @ticket.status
@@ -111,7 +111,12 @@ class TicketsController < ApplicationController
         end
         params[:ticket].delete(:status)
       end
+
+      @ticket.assigned_to_id = params[:ticket][:assigned_to_id]
+      assigned_changed = @ticket.assigned_to_id_changed?
+
       if @ticket.update_attributes(params[:ticket])
+        TicketMailer.assigned_to(@ticket).deliver if assigned_changed == true && @ticket.assigned_to.present?
         TicketMailer.state_change(@ticket, @user).deliver unless params[:ticket][:status] == @ticket.status 
         redirect_to tickets_path, notice: 'Ticket was successfully updated.'
       end
