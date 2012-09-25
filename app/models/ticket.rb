@@ -38,7 +38,7 @@ class Ticket < ActiveRecord::Base
     end
 
     event :pending do
-      transitions :to => :pending, :from => [:rejected]
+      transitions :to => :pending, :from => [:rejected,:in_process]
     end    
   end
 
