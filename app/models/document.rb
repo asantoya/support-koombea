@@ -11,6 +11,8 @@ class Document < ActiveRecord::Base
         icon_class = "img"
       when "doc", "docx", "odt"
         icon_class = "doc"
+      when "xls", "xlsx", "ods"
+        icon_class = "xls"
       when "pdf"
         icon_class = "pdf"
       else
