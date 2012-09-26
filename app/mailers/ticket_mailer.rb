@@ -33,4 +33,10 @@ class TicketMailer < ActionMailer::Base
     @user = ticket.assigned_to.email
     mail(to: @user, subject: "Ksupport - Assigned to")
   end
+
+  def new_user(user)
+    @user = user
+    @url = root_url
+    mail(to: @user.email, subject: "Ksupport - Welcome")
+  end
 end

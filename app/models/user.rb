@@ -15,12 +15,18 @@ class User < ActiveRecord::Base
 
   devise :omniauthable
 
+  after_create :mail_new_user
+
   def display_name
     self.email
   end
 
   def password_required?
     (!password.blank?) && super
+  end
+
+  def mail_new_user
+    TicketMailer.new_user(self).deliver
   end
 
   class << self
