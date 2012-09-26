@@ -31,7 +31,7 @@ class TicketMailer < ActionMailer::Base
   def assigned_to(ticket)
     @ticket = ticket
     @user = ticket.assigned_to.email
-    mail(to: @user, subject: "Ksupport - Assigned to")
+    mail(to: @user, subject: "Ksupport - Assigned to a new ticket")
   end
 
   def new_user(user)
