@@ -42,8 +42,8 @@ class Ticket < ActiveRecord::Base
     end    
   end
 
-  STATUS = [['Pending', 'pending'],['In Process', 'in_process'],['Ended', 'ended'],['Approved', 
-             'approved'],['Rejected','rejected']]
+  STATUS = [['Pending', 'pending'],['In Process', 'in_process'],['Ended', 'ended'],
+            ['Approved','approved'],['Rejected','rejected']]
 
   TYPE = [['Bug','bug'],['Features', 'features']]
   
