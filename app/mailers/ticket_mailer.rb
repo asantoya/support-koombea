@@ -18,14 +18,12 @@ class TicketMailer < ActionMailer::Base
     mail(to: @users, subject: "Ksupport - New Comment")
   end
 
-  def state_change(ticket, user)
+  def state_change(ticket, user, user_mail)
     @ticket = ticket
     @user = user
+    @user_mail = user_mail
     
-    @users_mail = [@ticket.user.email]
-    @users_mail << @ticket.assigned_to.email if @ticket.assigned_to.present?
-  
-    mail(to: @users_mail, subject: "Ksupport - State change in a ticket")
+    mail(to: @user_mail, subject: "Ksupport - State change in a ticket")
   end
 
   def assigned_to(ticket)

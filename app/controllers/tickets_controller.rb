@@ -95,6 +95,15 @@ class TicketsController < ApplicationController
     authorize! :choose_client, @user if params[:ticket][:choose_client]
     authorize! :choose_assigned, @user if params[:ticket][:choose_assigned]
     @ticket = Ticket.find(params[:id])
+
+    unless params[:ticket][:status] == @ticket.status 
+      unless params[:ticket][:assigned_to_id].present?
+        flash[:alert] = "The ticket hasn't been assigned, you can't change the status"
+        redirect_to edit_ticket_path(@ticket)
+        return
+      end
+    end
+
     begin
       unless params[:ticket][:status] == @ticket.status
         case params[:ticket][:status]
@@ -117,7 +126,13 @@ class TicketsController < ApplicationController
 
       if @ticket.update_attributes(params[:ticket])
         TicketMailer.assigned_to(@ticket).deliver if assigned_changed == true && @ticket.assigned_to.present?
-        TicketMailer.state_change(@ticket, @user).deliver unless params[:ticket][:status] == @ticket.status 
+        unless params[:ticket][:status] == @ticket.status
+          unless @ticket.status == "pending" || @ticket.status == "in_process"
+            @user_mail = @ticket.user.email if @ticket.status == "ended"
+            @user_mail = @ticket.assigned_to.email if @ticket.status == "approved" || @ticket.status == "rejected"
+            TicketMailer.state_change(@ticket, @user, @user_mail).deliver   
+          end
+        end
         redirect_to tickets_path, notice: 'Ticket was successfully updated.'
       end
     rescue AASM::InvalidTransition
