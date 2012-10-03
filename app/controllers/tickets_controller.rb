@@ -52,9 +52,9 @@ class TicketsController < ApplicationController
     @assigned = User.where(role: "support")
     
     if current_user.role == "support"
-      @ticket = Ticket.find_by_id(params[:id])  
+      @ticket = Ticket.includes(:user).includes(:comments).find_by_id(params[:id])  
     else
-      @ticket = current_user.tickets.find_by_id(params[:id])
+      @ticket = current_user.tickets.includes(:user).includes(:comments).find_by_id(params[:id])
     end
 
     @comments = @ticket.comments.includes(:documents)
