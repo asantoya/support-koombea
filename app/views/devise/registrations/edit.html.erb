@@ -1,31 +1,33 @@
-<h2>Edit my profile</h2>
+<div class="bg-white">
+  <h2>Edit my profile</h2>
 
-<%= form_for(resource, :as => resource_name, :url => user_registration_path, :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
+  <%= form_for(resource, :as => resource_name, :url => user_registration_path, :html => { :method => :put }) do |f| %>
+    <%= devise_error_messages! %>
 
-  <div>
-    <%= f.label :email, :class => 'control-label' %>
-    <%= f.email_field :email, :class => "text_field input-xxlarge" %>
-  </div>
+    <div>
+      <%= f.label :email, :class => 'control-label' %>
+      <%= f.email_field :email, :class => "text_field input-xxlarge" %>
+    </div>
 
-  <div>
-    <%= f.label :password %> 
-    <%= f.password_field :password, :autocomplete => "off", :class => "text_field input-xxlarge", placeholder: "leave blank if you don't want to change it" %>
-  </div>
+    <div>
+      <%= f.label :password %> 
+      <%= f.password_field :password, :autocomplete => "off", :class => "text_field input-xxlarge", placeholder: "leave blank if you don't want to change it" %>
+    </div>
 
-  <div>
-    <%= f.label :password_confirmation %>
-    <%= f.password_field :password_confirmation, :class => "text_field input-xxlarge" %>
-  </div>
+    <div>
+      <%= f.label :password_confirmation %>
+      <%= f.password_field :password_confirmation, :class => "text_field input-xxlarge" %>
+    </div>
 
-  <div>
-    <%= f.label :current_password %>
-    <%= f.password_field :current_password, :class => "text_field input-xxlarge", placeholder: "we need your current password to confirm your changes" %>
-  </div>
+    <div>
+      <%= f.label :current_password %>
+      <%= f.password_field :current_password, :class => "text_field input-xxlarge", placeholder: "we need your current password to confirm your changes" %>
+    </div>
 
-  <div class="form-actions">
-    <%= f.submit "Update", :class => 'btn btn-primary' %>
-    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                tickets_path, :class => 'btn' %>
-  </div>
-<% end %>
+    <div class="form-actions">
+      <%= f.submit "Update", :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  tickets_path, :class => 'btn' %>
+    </div>
+  <% end %>  
+</div>
