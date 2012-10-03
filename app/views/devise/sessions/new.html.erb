@@ -1,21 +1,30 @@
-<div class="center_login">
-  <h2>Login</h2>
-  <p>Enter your e-mail and password to sign in.</p>
-
-  <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-    <div><%= f.label :email %>
-    <%= f.email_field :email, :class => "input-xlarge" %></div>
-
-    <div><%= f.label :password %>
-    <%= f.password_field :password, :class => "input-xlarge" %></div>
-
-    <% if devise_mapping.rememberable? -%>
-      <div><%= f.check_box :remember_me, :class => "inline" %> <%= f.label :remember_me, :class => "inline" %></div>
+<div id="login">
+  <div class="team">
+    <h2>Welcome to Ksupport!</h2>
+    <p>To enter as a team member.</p>
+    <%- if devise_mapping.omniauthable? %>
+      <%- resource_class.omniauth_providers.each do |provider| %>
+        <%= link_to "Login", omniauth_authorize_path(resource_name, provider), class: "btn btn-primary btn-large" %><br />
+      <% end -%>
     <% end -%>
+  </div>
 
-    <div><%= f.submit "Login", :class => "btn" %></div>
-  <% end %>
+  <div class="client">
+    <h2>Clients</h2>
+    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+      <div><%= f.label :email %>
+      <%= f.email_field :email, :class => "input-xlarge" %></div>
 
-  <%= render "devise/shared/links" %>
+      <div>
+        <%= f.label :password %>
+        <%= f.password_field :password, :class => "input-xlarge" %>
+      </div>
+      
+      <%= render "devise/shared/links" %>
 
+      <div class="form-actions">
+        <%= f.submit "Sigin", :class => "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
 </div>

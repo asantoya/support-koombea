@@ -9,14 +9,13 @@ h1, h2, h3, h4 { font-weight: normal !important; }
 .loader { display: inline-block; }
 .loader img {display: none;}
 img.avatar { width: 20px;border-radius: 100px; }
-.center_login {margin: 0 auto;max-width: 300px;}
-.center_login label.inline { display: inline-block; }
-.top, .bottom { background-color: #34281D }
+.client_login {}
+.top { background-color: #34281D }
 .top .container { padding: 11px 0;}
 .top .container  a.dropdown-toggle, .top .container  a.dropdown-toggle:hover {background: #211A13 !important; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.13),inset 0 2px 2px rgba(0, 0, 0, 0.5);text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5); color: white}
 .top .container  a.dropdown-toggle .username {color: #9BCC0B}
 .top .container  a.dropdown-toggle .caret {border-top-color: #9CCC0B;}
-.bottom {color: #A29C92; text-align: center;padding: 20px 0;}
+.bottom {color: #000; text-align: center;padding: 20px 0;}
 .clear { clear: both;}
 .container { padding: 20px 0; }
 .filters { position: relative;margin: 20px 0; }
@@ -54,3 +53,61 @@ img.avatar { width: 20px;border-radius: 100px; }
 .files .doc { background-position: 3px -63px; }
 .files .xls { background-position: 3px -94px; }
 .files .mul { background-position: -63px }
+#login {
+  padding: 30px 0 0;
+
+  h2 {
+    font-size: 60px;
+    letter-spacing: -1px;
+    font-weight: bold;
+  }
+  .team {
+    display: inline-block;
+    vertical-align: top;
+    background-color: #EEE;
+    border-radius: 6px;
+    padding: 4% 7%;
+    margin: 0 50px 0 0;
+
+    p {
+      font-size: 18px;
+      font-weight: 200;
+      line-height: 27px;
+      color: inherit;
+      margin:15px 0;
+    }
+  }
+  .client {
+    display: inline-block;
+    background-color: #EEE;
+    border-radius: 6px;
+    padding: 30px;
+
+    h2 {
+      font-size:35px;
+      margin: 0 0 10px;
+    }
+    a {
+      font-style: oblique;
+      font-size:12px;
+      color:#08C;
+    }
+    .form-actions {
+      background-color:#EEE;
+    }
+  }
+  .client_password {
+    background-color: #EEE;
+    border-radius: 6px;
+    padding:5%;
+
+    h2 {
+      font-size:35px;
+      margin: 0 0 10px;
+    }
+
+    .form-actions {
+      background-color:#EEE;
+    }
+  }
+}
