@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :receives_notifications
   # attr_accessible :title, :body
 
-  has_many :tickets
+  has_many :tickets, :dependent => :destroy
   has_many :assigned_tickets, foreign_key: 'assigned_to_id', class_name: 'Ticket'
   has_many :comments, :dependent => :destroy
 

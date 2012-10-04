@@ -2,7 +2,7 @@ class Ticket < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :assigned_to, class_name: 'User'
-  has_many :comments
+  has_many :comments, :dependent => :destroy
 
   attr_accessible :description, :subject, :ticket_type, :status, :user_id, :assigned_to_id
 
