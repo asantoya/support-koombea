@@ -6,7 +6,7 @@ class Document < ActiveRecord::Base
   mount_uploader :document, DocumentUploader 
 
   def icon_extension
-    case self.document.file.extension
+    case self.document.file.path.split(".").last
       when "jpg", "jpeg", "png", "gif"
         icon_class = "img"
       when "doc", "docx", "odt"

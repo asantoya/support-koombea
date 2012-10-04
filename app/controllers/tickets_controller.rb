@@ -16,7 +16,7 @@ class TicketsController < ApplicationController
 
   def show
 
-    if current_user.role == "support"
+    if current_user.role == "support"   
       @ticket = Ticket.find_by_id(params[:id])  
     else
       @ticket = current_user.tickets.find_by_id(params[:id])
@@ -56,8 +56,6 @@ class TicketsController < ApplicationController
     else
       @ticket = current_user.tickets.includes(:user).includes(:comments).find_by_id(params[:id])
     end
-
-    @comments = @ticket.comments.includes(:documents)
 
     if @ticket.blank?
       flash[:error] = "Sorry, ticket is not accessible. Access denied."

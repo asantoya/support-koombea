@@ -1,6 +1,6 @@
 <% if @success.present? %>
   $("#msg_comment").removeClass('alert-error').addClass("alert-success").html('<%= @success %>').show()
-  $("#comments").html("<%= j(render @ticket.comments )%>");
+  $("#comments").append("<%= j(render @comment )%>");
   $("#comment_body").val("");
   $(".loader img").hide("slow")
   $(".fileupload").val("")
