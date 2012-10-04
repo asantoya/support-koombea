@@ -4,7 +4,7 @@
     <p>To enter as a team member.</p>
     <%- if devise_mapping.omniauthable? %>
       <%- resource_class.omniauth_providers.each do |provider| %>
-        <%= link_to "Login", omniauth_authorize_path(resource_name, provider), class: "btn btn-primary btn-large" %><br />
+        <%= link_to "Log in", omniauth_authorize_path(resource_name, provider), class: "btn btn-primary btn-large" %><br />
       <% end -%>
     <% end -%>
   </div>
@@ -23,7 +23,7 @@
       <%= render "devise/shared/links" %>
 
       <div class="form-actions">
-        <%= f.submit "Sigin", :class => "btn btn-primary" %>
+        <%= f.submit "Sign in", :class => "btn btn-primary" %>
       </div>
     <% end %>
   </div>
