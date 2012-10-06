@@ -5,6 +5,11 @@
   </div>
   <div class="item">
     <h2><%= link_to ticket.subject, edit_ticket_path(ticket) %></h2>
+    <% unless ticket.comments.unread_by(current_user).count == 0 %>
+      <div class="count-comments">
+        <%= image_tag "comments.png", width: '32' %>
+      </div>
+    <% end %>
     <p>
       <strong>Client: </strong><%= ticket.user.email %>
       <br>
@@ -14,6 +19,7 @@
         <strong>It hasn't been assigned</strong>
       <% end %>
     </p>
+
     <div class="status">
       <% case ticket.status
           when "approved" %>

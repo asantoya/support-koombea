@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+
+  acts_as_reader
+  
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable, :registerable,
   # :lockable, :timeoutable and :omniauthable

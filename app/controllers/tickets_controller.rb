@@ -57,6 +57,9 @@ class TicketsController < ApplicationController
       @ticket = current_user.tickets.includes(:user).includes(:comments).find_by_id(params[:id])
     end
 
+    @comments = @ticket.comments
+    @count_comments = @ticket.comments.unread_by(current_user).count
+
     if @ticket.blank?
       flash[:error] = "Sorry, ticket is not accessible. Access denied."
       redirect_to tickets_path

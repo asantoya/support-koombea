@@ -6,10 +6,6 @@ SupportKoombea::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
-  get "comments/create"
-
-  get "comments/destroy"
-
   devise_for :users, :controllers => { omniauth_callbacks: "users/omniauth_callbacks" }, :skip => [:registrations]                                          
   as :user do
     get 'users/edit' => 'devise/registrations#edit', :as => 'edit_user_registration'    
@@ -26,7 +22,9 @@ SupportKoombea::Application.routes.draw do
     end
   end
   resources :tickets do
-    resources :comments
+    resources :comments do
+      get "mark_read_comments", :on => :collection
+    end
   end
 
 end

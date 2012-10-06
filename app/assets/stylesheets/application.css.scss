@@ -11,7 +11,8 @@ h1, h2, h3, h4 { font-weight: normal !important; }
 img.avatar { width: 20px;border-radius: 100px; }
 .client_login {}
 .top { background-color: #34281D }
-.top .container { padding: 11px 0;}
+.top .container { padding: 5px 0;}
+.top .container .left { margin:4px 0 0;}
 .top .container  a.dropdown-toggle, .top .container  a.dropdown-toggle:hover {background: #211A13 !important; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.13),inset 0 2px 2px rgba(0, 0, 0, 0.5);text-shadow: 0 1px 1px rgba(0, 0, 0, 0.5); color: white}
 .top .container  a.dropdown-toggle .username {color: #9BCC0B}
 .top .container  a.dropdown-toggle .caret {border-top-color: #9CCC0B;}
@@ -23,7 +24,7 @@ img.avatar { width: 20px;border-radius: 100px; }
 .filters i:hover { background-color: #DCDDD7; border: 1px solid #AAA; box-shadow: inset 0px 3px 2px #AAA; border-radius: 10px;}
 .filters a { text-decoration: none !important; color: #666 !important; margin: 0 0 0 5px; text-shadow:0 1px rgba(255, 255, 255, 0.7);font-style: normal; }
 .filters .btn-primary { position: absolute; right: 0; color: white !important; text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25); }
-.ticket { display: block; margin: 0 0 20px; background: white; border-radius: 10px;box-shadow: 0 0 2px rgba(0, 0, 0, 0.05)}
+.ticket { position: relative; display: block; margin: 0 0 20px; background: white; border-radius: 10px;box-shadow: 0 0 2px rgba(0, 0, 0, 0.05);padding-top: 10px;}
 .ticket .date {display: inline-block; padding: 26px 0; background: url(/assets/date.png) no-repeat; color: white;width: 9%;margin:10px 0 0 10px;}
 .ticket .date span { display: block; margin: 0 0 1px; text-align: center;}
 .ticket .date span.month { font-size: 25px; margin: 0 0 10px;}
@@ -44,6 +45,7 @@ img.avatar { width: 20px;border-radius: 100px; }
 .controls.select select { width: 540px; }
 #ticket_description { width: 530px; height: 100px;}
 #msg_comment { display: none;width: 82%;margin: 0 0 20px 100px; }
+.alert-count-comments { padding:8px 35px 8px 14px; border-radius:4px 4px 4px 4px; text-shadow:0 1px 0 rgba(255, 255, 255, 0.5); margin-bottom:18px; border: 1px solid #BCE8F1; a { color:#3A87AD; &:hover {text-decoration: underline; }}}
 .field input { display:block; margin: 0 0 0 20px; }
 .add_fields { display: block; width: 50px;margin: 0 0 0 20px;}
 .files ul { list-style: none; margin-left: 0  }
@@ -53,6 +55,8 @@ img.avatar { width: 20px;border-radius: 100px; }
 .files .doc { background-position: 3px -63px; }
 .files .xls { background-position: 3px -94px; }
 .files .mul { background-position: 3px -124px }
+.count-comments { display: inline-block;position: absolute;right: 10px;}
+.comment_open { display:inline-block; float:right; }
 .bg-white {
   padding: 3%;
   background: white;

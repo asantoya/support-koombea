@@ -4,14 +4,19 @@
     <span class="day"><%= @ticket.created_at.strftime("%d") %></span>
   </div>
   <div class="item">
-
+    <% unless @count_comments == 0 %>
+      <div class="alert-info alert-count-comments">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        <strong>Info! </strong><%= link_to "You have " + pluralize(@count_comments, "comment") + " unread" , {controller: "comments", action: "mark_read_comments", ticket_id: @ticket}, remote: true, class: "scrollTo" %>
+      </div>
+    <% end %>
     <%= render 'form' %>
     
     <div class="clear"></div>
   </div>
 
   <div id="comments">
-    <%= render @ticket.comments %>
+    <%= render @comments %>
   </div>
 
   <div class="add-comment">

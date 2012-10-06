@@ -16,4 +16,11 @@ class CommentsController < ApplicationController
     end
   end
 
+  def mark_read_comments
+    @ticket = Ticket.find(params[:ticket_id])
+    @ticket.comments.each do |c|
+      c.mark_as_read! :for => current_user
+    end
+  end
+
 end

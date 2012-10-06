@@ -52,9 +52,9 @@ class Ticket < ActiveRecord::Base
   def self.search(status)
 
     if status
-      where(status: status).includes(:user).order("created_at DESC")
+      where(status: status).includes(:user).includes(:comments).order("created_at DESC")
     else
-      order("created_at DESC").includes(:user)
+      order("created_at DESC").includes(:user).includes(:comments)
     end
   end
 

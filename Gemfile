@@ -20,6 +20,7 @@ gem 'mini_magick'
 gem 'mime-types'
 gem "remotipart", "~> 1.0.2"
 gem "fog", "~> 1.3.1"
+gem 'unread'
 
 # Gems used only for assets and not required
 # in production environments by default.

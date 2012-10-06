@@ -1,4 +1,5 @@
 <div class="comment">
+  <%= image_tag "comment_open.png", class: "comment_open" if comment.unread?(current_user) == true %>
   <div class="img">
     <%= image_tag avatar_url(comment.user) %>
   </div>
