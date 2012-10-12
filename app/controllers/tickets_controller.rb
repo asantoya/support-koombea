@@ -57,6 +57,7 @@ class TicketsController < ApplicationController
     end
 
     if @ticket.present?
+      @comments = @ticket.comments
       @count_comments = @ticket.comments.unread_by(@user).count
     else
       flash[:error] = "Sorry, ticket is not accessible. Access denied."
