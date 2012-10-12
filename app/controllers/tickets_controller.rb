@@ -15,7 +15,6 @@ class TicketsController < ApplicationController
   end
 
   def show
-
     if current_user.role == "support"   
       @ticket = Ticket.find_by_id(params[:id])  
     else
@@ -24,13 +23,13 @@ class TicketsController < ApplicationController
     
     respond_to do |format|
       format.html {
-        if @ticket.blank?
+        if @ticket.present?
+          redirect_to edit_ticket_path(@ticket)
+        else
           flash[:error] = "Sorry, ticket is not accessible. Access is denied."
           redirect_to tickets_path
-        else
-          redirect_to edit_ticket_path(@ticket)
         end
-        } 
+      } 
     end
   end
 
@@ -57,14 +56,12 @@ class TicketsController < ApplicationController
       @ticket = current_user.tickets.includes(:user).includes(:comments).find_by_id(params[:id])
     end
 
-    @comments = @ticket.comments
-    @count_comments = @ticket.comments.unread_by(current_user).count
-
-    if @ticket.blank?
+    if @ticket.present?
+      @count_comments = @ticket.comments.unread_by(@user).count
+    else
       flash[:error] = "Sorry, ticket is not accessible. Access denied."
       redirect_to tickets_path
     end
-    
   end
 
   def create 
@@ -93,8 +90,6 @@ class TicketsController < ApplicationController
 
   def update
     @user = current_user
-    authorize! :choose_client, @user if params[:ticket][:choose_client]
-    authorize! :choose_assigned, @user if params[:ticket][:choose_assigned]
     @ticket = Ticket.find(params[:id])
 
     unless params[:ticket][:status] == @ticket.status 
@@ -134,7 +129,7 @@ class TicketsController < ApplicationController
             TicketMailer.state_change(@ticket, @user, @user_mail).deliver   
           end
         end
-        redirect_to tickets_path, notice: 'Ticket was successfully updated.'
+        redirect_to edit_ticket_path(@ticket), notice: 'Ticket was successfully updated.'
       end
     rescue AASM::InvalidTransition
       flash[:alert] = "You can't select this state"

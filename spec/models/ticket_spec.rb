@@ -16,3 +16,19 @@ describe Ticket, "validations" do
     FactoryGirl.build(:ticket, description: nil).should_not be_valid
   end
 end
+
+describe Ticket do
+  it "return subject" do
+    ticket = FactoryGirl.build(:ticket)
+    ticket.display_name.should eq(ticket.subject)
+  end
+
+  it "returns a sorted array of results that match" do
+
+    ticket = FactoryGirl.create(:ticket, status: "in_process")
+    ticket1 = FactoryGirl.create(:ticket, status: "ended")
+    ticket2 = FactoryGirl.create(:ticket, status: "ended")
+
+    Ticket.search("ended").sort.should == [ticket1, ticket2]
+  end
+end

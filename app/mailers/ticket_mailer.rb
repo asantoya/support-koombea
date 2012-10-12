@@ -1,6 +1,6 @@
 class TicketMailer < ActionMailer::Base
 
-  default from: "contact@koombea.com"
+  default from: "support@koombea.com"
 
   def new_ticket(ticket, users)
     @users = users

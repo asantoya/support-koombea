@@ -22,23 +22,23 @@ gem "remotipart", "~> 1.0.2"
 gem "fog", "~> 1.3.1"
 gem 'unread'
 
-# Gems used only for assets and not required
-# in production environments by default.
 group :assets do
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end
 
 group :development, :test do
-  gem 'rspec-rails'
   gem 'mysql2'
-  gem "factory_girl_rails", "~> 4.0", require: false
-  gem 'simplecov', :require => false
 end
 
 group :test do
+  gem 'rspec-rails'
   gem 'capybara'
   gem "shoulda", ">=3.0.1"
+  gem "factory_girl_rails", "~> 4.0", require: false
+  gem 'simplecov', :require => false
+  gem 'database_cleaner'
+  gem 'pry-rails'
 end
 
 group :production do

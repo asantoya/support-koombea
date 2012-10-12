@@ -23,14 +23,21 @@ describe "find_for_google_apps" do
     end
 
     it "should not create a new user if it is found on the database, by email" do
-      @user = FactoryGirl.create(:user, email: @auth["info"]["email"])
+      @user = FactoryGirl.create(:support_user, email: @auth["info"]["email"])
       expect {
         User.find_for_google_apps(@auth)
       }.not_to change(User, :count)
     end
 
     it "should return the existing user if it already exists" do
-      @user = FactoryGirl.create(:user, email: @auth["info"]["email"])
+      @user = FactoryGirl.create(:support_user, email: @auth["info"]["email"])
       User.find_for_google_apps(@auth).should eql(@user)
     end
+end
+
+describe User do
+  it "return email" do
+    user = FactoryGirl.build(:user)
+    user.display_name.should eq(user.email)
   end
+end

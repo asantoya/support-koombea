@@ -4,7 +4,7 @@ require File.expand_path('../application', __FILE__)
 # Initialize the rails application
 SupportKoombea::Application.initialize!
 
-ActionMailer::Base.delivery_method = :smtp
+#ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
   :user_name => "app7104717@heroku.com",
   :password => "4torw8sb",

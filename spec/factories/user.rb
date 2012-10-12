@@ -7,6 +7,7 @@ FactoryGirl.define do
     email
     password "test123"
     receives_notifications true
+    role "support"
   
     trait :support do
       role "support"

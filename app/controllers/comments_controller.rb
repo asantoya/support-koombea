@@ -21,6 +21,9 @@ class CommentsController < ApplicationController
     @ticket.comments.each do |c|
       c.mark_as_read! :for => current_user
     end
+    respond_to do |format|
+      format.js
+    end
   end
 
 end
