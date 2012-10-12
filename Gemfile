@@ -29,6 +29,7 @@ end
 
 group :development, :test do
   gem 'mysql2'
+  gem 'pry-rails'
 end
 
 group :test do
@@ -38,7 +39,6 @@ group :test do
   gem "factory_girl_rails", "~> 4.0", require: false
   gem 'simplecov', :require => false
   gem 'database_cleaner'
-  gem 'pry-rails'
 end
 
 group :production do
