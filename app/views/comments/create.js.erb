@@ -2,6 +2,7 @@
   $("#msg_comment").removeClass('alert-error').addClass("alert-success").html('<%= @success %>').show()
   $("#comments").append("<%= j(render @comment )%>");
   $("#comment_body").val("");
+  $(".file").hide()
   $(".loader img").hide("slow")
   $(".fileupload").val("")
   setTimeout(function  () {
