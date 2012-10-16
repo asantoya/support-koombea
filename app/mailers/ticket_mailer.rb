@@ -1,6 +1,6 @@
 class TicketMailer < ActionMailer::Base
 
-  default from: "support@koombea.com"
+  default from: "koombea Support <support@koombea.com>"
 
   def new_ticket(ticket, users)
     @users = users
@@ -23,7 +23,7 @@ class TicketMailer < ActionMailer::Base
     @user = user
     @user_mail = user_mail
     
-    mail(to: @user_mail, subject: "Ksupport - State change in a ticket")
+    mail(to: @user_mail, subject: "Ksupport - Status change in a ticket")
   end
 
   def assigned_to(ticket)
