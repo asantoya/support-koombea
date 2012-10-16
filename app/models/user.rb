@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   # :token_authenticatable, :confirmable, :registerable,
   # :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
   attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :receives_notifications
@@ -15,8 +15,6 @@ class User < ActiveRecord::Base
   has_many :tickets, :dependent => :destroy
   has_many :assigned_tickets, foreign_key: 'assigned_to_id', class_name: 'Ticket'
   has_many :comments, :dependent => :destroy
-
-  devise :omniauthable
 
   after_create :mail_new_user
 

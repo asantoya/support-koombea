@@ -157,7 +157,7 @@ describe TicketsController do
       assigns(:clients).should eq(clients)
     end 
   end
-=begin
+
   describe '#update' do
     before :each do
       @user = FactoryGirl.create(:support_user)
@@ -165,17 +165,17 @@ describe TicketsController do
       @ticket = FactoryGirl.create(:ticket)
     end
 
+    it "should show flash error" do
+      put :update, { id: @ticket }
+      flash[:error].should_not be_nil
+    end
+
     it "located the requested ticket" do
       put :update, { id: @ticket } 
       assigns(:ticket).should eq(@ticket)
     end
-
-    it "redirects to the updated ticket" do
-      put :update, id: @ticket
-      response.should redirect_to @ticket
-    end
   end
-=end
+
   describe 'DELETE destroy' do
     it "should delete the ticket" do
       @user = FactoryGirl.create(:client_user)
