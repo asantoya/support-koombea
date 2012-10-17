@@ -46,16 +46,19 @@ class Ticket < ActiveRecord::Base
             ['Approved','approved'],['Rejected','rejected']]
 
   TYPE = [['Bug','bug'],['Features', 'features']]
+
+  ASSIGNED = User.where(role: "support")
+
+  CLIENTS = User.where(role: "client")
   
   after_create :mail_new_ticket
 
-  def self.search(status)
-
-    if status
-      where(status: status).includes(:user).includes(:comments).order("created_at DESC")
-    else
-      order("created_at DESC").includes(:user).includes(:comments)
-    end
+  def self.search(client, assigned, status)
+    tickets = order("created_at DESC").includes(:user).includes(:comments)
+    tickets = tickets.where(user_id: client) if client.present?
+    tickets = tickets.where(assigned_to_id: assigned) if assigned.present?
+    tickets = tickets.where(status: status) if status.present?
+    tickets
   end
 
   def display_name

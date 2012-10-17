@@ -1,10 +1,11 @@
 class TicketsController < ApplicationController
 
   def index
+    @user = current_user
     if current_user.role == "support"
-      @tickets = Ticket.search(params[:status]).paginate(:page => params[:page], :per_page => 10)
+      @tickets = Ticket.search(params[:user_id], params[:assigned_to_id], params[:status]).paginate(:page => params[:page], :per_page => 10)
     else 
-      @tickets = current_user.tickets.search(params[:status]).paginate(:page => params[:page], :per_page => 10)
+      @tickets = current_user.tickets.search(nil, nil, params[:status]).paginate(:page => params[:page], :per_page => 10)
     end
 
     respond_to do |format|
