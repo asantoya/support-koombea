@@ -29,6 +29,6 @@ describe Ticket do
     ticket1 = FactoryGirl.create(:ticket, status: "ended")
     ticket2 = FactoryGirl.create(:ticket, status: "ended")
 
-    Ticket.search("ended").sort.should == [ticket1, ticket2]
+    Ticket.search(nil, nil, "ended").sort.should == [ticket1, ticket2]
   end
 end
