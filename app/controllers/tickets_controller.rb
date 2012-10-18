@@ -2,8 +2,8 @@ class TicketsController < ApplicationController
 
   def index
     @user = current_user
-    @assigned = User.where(role: "support")
-    @clients = User.where(role: "client")
+    @assigned = User.where(role: "support").order("name")
+    @clients = User.where(role: "client").order("name")
 
     if current_user.role == "support"
       @tickets = Ticket.search(params[:user_id], params[:assigned_to_id], params[:status]).paginate(:page => params[:page], :per_page => 10)
@@ -51,8 +51,8 @@ class TicketsController < ApplicationController
 
   def edit
     @user = current_user
-    @clients = User.where(role: "client")
-    @assigned = User.where(role: "support")
+    @clients = User.where(role: "client").order("name")
+    @assigned = User.where(role: "support").order("name")
     
     if current_user.role == "support"
       @ticket = Ticket.includes(:user).includes(:comments).find_by_id(params[:id])  
@@ -83,8 +83,8 @@ class TicketsController < ApplicationController
         format.json { render json: @ticket, status: :created, location: @ticket }
       else
         format.html { 
-          @clients = User.where(role: "client")
-          @assigned = User.where(role: "support")
+          @clients = User.where(role: "client").order("name")
+          @assigned = User.where(role: "support").order("name")
           @user = current_user
           render action: "new" 
         }
