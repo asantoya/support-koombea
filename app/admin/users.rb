@@ -3,6 +3,7 @@ ActiveAdmin.register User do
   config.per_page = 10
   
   index do
+    column :name
     column :email
     column :role
     column :last_sign_in_at
@@ -21,6 +22,7 @@ ActiveAdmin.register User do
 
   form do |f|
     f.inputs "Users" do
+      f.input :name
       f.input :email
       f.input :password
       f.input :password_confirmation
@@ -33,6 +35,7 @@ ActiveAdmin.register User do
 
   show do
     attributes_table do
+      row :name
       row :email
       row :role
       row :receives_notifications

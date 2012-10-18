@@ -2,6 +2,9 @@ class TicketsController < ApplicationController
 
   def index
     @user = current_user
+    @assigned = User.where(role: "support")
+    @clients = User.where(role: "client")
+
     if current_user.role == "support"
       @tickets = Ticket.search(params[:user_id], params[:assigned_to_id], params[:status]).paginate(:page => params[:page], :per_page => 10)
     else 

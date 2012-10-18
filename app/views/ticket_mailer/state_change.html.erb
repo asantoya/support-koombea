@@ -4,9 +4,15 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Hello</h1>
-    
-    <p>The user <%= @user.email %> changed the status of ticket "<%= @ticket.subject %>" to "<%= @ticket.status.gsub('_', ' ').upcase %>"</p>
-    
+    <p>Hello,</p>
+    <p>
+    	<%= @user.name %> changed the status of ticket "<%= @ticket.subject %>" to "<%= @ticket.status.gsub('_', ' ').upcase %>".
+    	<br>
+    	<%= @url_ticket %>
+    </p>
+
+    <br>
+    <p>This message sent from Koombea Support.</p>
+    <p>Koombea Support: <%= @url %></p>
   </body> 
 </html>

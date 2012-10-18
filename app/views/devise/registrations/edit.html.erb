@@ -5,6 +5,11 @@
     <%= devise_error_messages! %>
 
     <div>
+      <%= f.label :name, :class => 'control-label' %>
+      <%= f.email_field :name, :class => "text_field input-xxlarge" %>
+    </div>
+
+    <div>
       <%= f.label :email, :class => 'control-label' %>
       <%= f.email_field :email, :class => "text_field input-xxlarge", disabled: true %>
     </div>

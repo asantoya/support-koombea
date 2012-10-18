@@ -4,13 +4,13 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Hello</h1>
-    
-    <h3>New Comment</h3>
-    
-    <p><strong><em>Client: </em></strong><%= @comment.ticket.user.email %></p>
-    <p><strong><em>Ticket: </em></strong><%= @comment.ticket.subject %></p>
-    <p><strong><em>Review by: </em></strong><%= @comment.user.email %></p>
-    <p><strong><em>Comment: </em></strong><%= @comment.body %></p>
+    <p>Hello,</p>
+    <p><%= @comment.user.name %> has commented on the ticket: <%= @comment.ticket.subject %></p>
+    <p><%= @comment.body %></p>
+    <p><%= @url_ticket %></p>
+
+    <br>
+    <p>This message sent from Koombea Support.</p>
+    <p>Koombea Support: <%= @url %></p>
   </body> 
 </html>

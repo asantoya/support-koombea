@@ -47,10 +47,6 @@ class Ticket < ActiveRecord::Base
 
   TYPE = [['Bug','bug'],['Features', 'features']]
 
-  ASSIGNED = User.where(role: "support")
-
-  CLIENTS = User.where(role: "client")
-  
   after_create :mail_new_ticket
 
   def self.search(client, assigned, status)

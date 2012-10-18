@@ -4,13 +4,16 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Hello, Support team</h1>
-    
-    <h3>New Ticket created</h3>
-    
-    <p><strong><em>Client: </em></strong><%= @ticket.user.email %></p>
-    <p><strong><em>Subject: </em></strong><%= @ticket.subject %></p>
-    <p><strong><em>Type: </em></strong><%= @ticket.ticket_type.capitalize %></p>
-    <p><strong><em>Description: </em></strong><%= @ticket.description %></p>
+    <p>Hello, Support team</p>
+    <p>New ticket has been created</p>   
+    <p>Client: <%= @ticket.user.email %></p>
+    <p>Subject: "<%= @ticket.subject %>"</p>
+    <p>Type: "<%= @ticket.ticket_type.capitalize %>"</p>
+    <p>Description: <%= @ticket.description %></p>
+    <p><%= @url_ticket %></p>
+
+    <br>
+    <p>This message sent from Koombea Support.</p>
+    <p>Koombea Support: <%= @url %></p>
   </body> 
 </html>

@@ -4,7 +4,7 @@
     <%= image_tag avatar_url(comment.user) %>
   </div>
   <div class="body">
-    <h3>Review by: <%= comment.user.email %></h3>
+    <h3>Review by: <%= comment.user.name %></h3>
     <span><%= comment.created_at.strftime("%B %e, %Y ") %></span>
     <p><%= markdown comment.body %></p>
 

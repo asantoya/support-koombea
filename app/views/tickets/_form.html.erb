@@ -15,7 +15,7 @@
     <div class="control-group">
       <%= f.label :user, "Client", :class => 'control-label' %>
       <div class="controls select">
-        <%= f.select(:user_id, options_from_collection_for_select(@clients, 'id', 'email', @ticket.user_id), {:include_blank => true }, {:class => "text_field input-xxlarge"} ) %>
+        <%= f.select(:user_id, options_from_collection_for_select(@clients, 'id', 'name', @ticket.user_id), {:include_blank => true }, {:class => "text_field input-xxlarge"} ) %>
       </div>
     </div>
   <% end %>
@@ -56,7 +56,7 @@
     <div class="control-group">
       <%= f.label :user, "Assigned to", :class => 'control-label' %>
       <div class="controls select">
-        <%= f.select(:assigned_to_id, options_from_collection_for_select(@assigned, 'id', 'email', @ticket.assigned_to_id), {:include_blank => true }, {:class => "text_field input-xxlarge"} ) %>
+        <%= f.select(:assigned_to_id, options_from_collection_for_select(@assigned, 'id', 'name', @ticket.assigned_to_id), {:include_blank => true }, {:class => "text_field input-xxlarge"} ) %>
       </div>
     </div>
   <% end %> 

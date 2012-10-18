@@ -14,7 +14,7 @@
       <strong>Client: </strong><%= ticket.user.email %>
       <br>
       <% if ticket.assigned_to.present? %>
-        <strong>Assigned to: </strong><%= ticket.assigned_to.email %>
+        <strong>Assigned to: </strong><%= ticket.assigned_to.name %>
       <% else %>
         <strong>It hasn't been assigned</strong>
       <% end %>

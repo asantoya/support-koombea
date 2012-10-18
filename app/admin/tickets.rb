@@ -8,10 +8,12 @@ ActiveAdmin.register Ticket do
       t.updated_at.strftime("%b %e, %Y")
     end
     column "Status", :status
-    column "Type", :ticket_type do |ticket|
-      ticket.ticket_type.capitalize
+    column "Type", :ticket_type do |t|
+      t.ticket_type.capitalize
     end
-    column :assigned_to
+    column :assigned_to do |t|
+      t.assigned_to.name if t.assigned_to.present?
+    end
 
     default_actions 
   end

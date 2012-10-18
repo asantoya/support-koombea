@@ -9,8 +9,10 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :receives_notifications
-  # attr_accessible :title, :body
+  attr_accessible :email, :password, :password_confirmation, 
+                  :remember_me, :role, :receives_notifications, :name
+
+  validates :name, :email, :role, presence: true                  
 
   has_many :tickets, :dependent => :destroy
   has_many :assigned_tickets, foreign_key: 'assigned_to_id', class_name: 'Ticket'
@@ -19,7 +21,7 @@ class User < ActiveRecord::Base
   after_create :mail_new_user
 
   def display_name
-    self.email
+    self.name
   end
 
   def password_required?

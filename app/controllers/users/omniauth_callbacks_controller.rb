@@ -3,10 +3,10 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def google_apps
     @user = User.find_for_google_apps(auth)
-
     if @user.persisted?
       sign_in_and_redirect @user, :event => :authentication
     else
+      @user.name = auth["info"]["name"]
       @user.role = "support"
       @user.save
       sign_in_and_redirect @user, :event => :authentication

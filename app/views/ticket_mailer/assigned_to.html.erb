@@ -4,9 +4,13 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Hello</h1>
     
-    <p>You have been assigned to the ticket "<%= @ticket.subject %>"</p>
-    
+    <p>Hello, <%= @user.name %></p>
+    <p>The ticket "<%= @ticket.subject %>" is now owned by you.</p>
+    <p><%= @url_ticket %></p>	
+
+    <br>
+    <p>This message sent from Koombea Support.</p>
+    <p>Koombea Support: <%= @url %></p>
   </body> 
 </html>

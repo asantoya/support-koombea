@@ -4,12 +4,15 @@
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
   </head>
   <body>
-    <h1>Welcome to Ksupport</h1>
-    
-    <p>Hello, <%= @user.email %></p>
+    <p>Hello, <%= @user.name %></p>
     <p>Now you are registered in Ksupport with a <%= @user.role.upcase %> role.</p>
+    <% unless @user.role == "support" %>
     <p>Your password is: <%= @user.password %></p>
+    <% end %>
     <p>To login to the site, just follow this link: <%= @url %>.</p>
 
+    <br>
+    <p>This message sent from Koombea Support.</p>
+    <p>Koombea Support: <%= @url %></p>
   </body> 
 </html>
