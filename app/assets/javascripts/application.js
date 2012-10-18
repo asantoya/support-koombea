@@ -32,4 +32,8 @@ $(document).on("ready", function () {
     $(this).before($(this).data('fields').replace(regexp, time))
     event.preventDefault()
   })
+  $(".filters i a").on("click", function  () {
+    $(".filters i").removeClass('active');
+    $(this).parent().addClass('active');
+  })
 })
