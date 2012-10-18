@@ -11,7 +11,7 @@
       </div>
     <% end %>
     <p>
-      <strong>Client: </strong><%= ticket.user.email %>
+      <strong>Client: </strong><%= ticket.user.name %>
       <br>
       <% if ticket.assigned_to.present? %>
         <strong>Assigned to: </strong><%= ticket.assigned_to.name %>
