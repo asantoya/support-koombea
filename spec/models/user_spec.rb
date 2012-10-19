@@ -36,8 +36,8 @@ describe "find_for_google_apps" do
 end
 
 describe User do
-  it "return email" do
+  it "return name" do
     user = FactoryGirl.build(:user)
-    user.display_name.should eq(user.email)
+    user.display_name.should eq(user.name)
   end
 end
