@@ -61,6 +61,17 @@
     </div>
   <% end %> 
 
+  <% if can? :see_assigend, @user %>
+    <% unless @ticket.new_record? %>
+      <div class="control-group">
+        <%= f.label :user, "Assigned to", :class => 'control-label' %>
+        <div class="controls select">
+          <%= f.select(:assigned_to_id, options_from_collection_for_select(@assigned, 'id', 'name', @ticket.assigned_to_id), {:include_blank => true }, {:class => "text_field input-xxlarge", disabled: true} ) %>
+        </div>
+      </div>
+    <% end %>
+  <% end %> 
+
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
     <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
