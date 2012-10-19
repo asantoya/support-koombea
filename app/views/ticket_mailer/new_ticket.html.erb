@@ -6,7 +6,7 @@
   <body>
     <p>Hello, Support team</p>
     <p>New ticket has been created</p>   
-    <p>Client: <%= @ticket.user.email %></p>
+    <p>Client: <%= @ticket.user.name %></p>
     <p>Subject: "<%= @ticket.subject %>"</p>
     <p>Type: "<%= @ticket.ticket_type.capitalize %>"</p>
     <p>Description: <%= @ticket.description %></p>

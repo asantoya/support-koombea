@@ -30,6 +30,7 @@ end
 group :development, :test do
   gem 'mysql2'
   gem 'pry-rails'
+  gem "letter_opener"
 end
 
 group :test do
