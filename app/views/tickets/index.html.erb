@@ -1,8 +1,8 @@
 <div class="filters">
   <% if can? :filer_form, @user %>
     <%= form_tag(tickets_path, method: :get, remote: true, class: "form-inline") do %>
-      <%= select_tag :user_id, options_from_collection_for_select(@clients, 'id', 'name', params[:user_id]), :prompt => "Client", class: "input-large" %>
-      <%= select_tag :assigned_to_id, options_from_collection_for_select(@assigned, 'id', 'name', params[:assigned_to_id]), :prompt => "Assigned to", class: "input-large" %>
+      <%= select_tag :user_id, options_from_collection_for_select(@clients, 'id', 'name'), :prompt => "Client", class: "input-large" %>
+      <%= select_tag :assigned_to_id, options_from_collection_for_select(@assigned, 'id', 'name'), :prompt => "Assigned to", class: "input-large" %>
       <%= select_tag :status, options_for_select(Ticket::STATUS, params[:status]), :prompt => "Status", class: "input-medium" %>
       <%= submit_tag "Filter", class: "btn btn-info", name: nil %>
       <%= link_to "Reset Filters", tickets_path, class: "btn" %>
@@ -11,10 +11,10 @@
 
   <% if can? :filer_status, @user %>
     <i class="active"><%= link_to 'All', root_path, :class => "btn-link", :remote => true %></i>
-    <i class="icon-ok-circle"><%= link_to 'Approved', tickets_path(:status => "approved"), :class => "btn-link", :remote => true %></i>
+    <i class="icon-time"><%= link_to 'Pending', tickets_path(:status => "pending"), :class => "btn-link", :remote => true %></i>
     <i class="icon-cog"><%= link_to 'In Process', tickets_path(:status => "in_process"), :class => "btn-link", :remote => true %></i>
     <i class="icon-remove-sign"><%= link_to 'Ended', tickets_path(:status => "ended"), :class => "btn-link", :remote => true %></i>
-    <i class="icon-time"><%= link_to 'Pending', tickets_path(:status => "pending"), :class => "btn-link", :remote => true %></i>
+    <i class="icon-ok-circle"><%= link_to 'Approved', tickets_path(:status => "approved"), :class => "btn-link", :remote => true %></i>
     <i class="icon-remove-circle"><%= link_to 'Rejected', tickets_path(:status => "rejected"), :class => "btn-link", :remote => true %></i>
   <% end %>
 
