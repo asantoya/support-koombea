@@ -52,25 +52,24 @@
     </div>
   </div>
 
-  <% if can? :choose_assigned, @user %>
-    <div class="control-group">
+  
+  <div class="control-group">
       <%= f.label :user, "Assigned to", :class => 'control-label' %>
-      <div class="controls select">
+    <div class="controls select">
+      <% if can? :choose_assigned, @user %>
         <%= f.select(:assigned_to_id, options_from_collection_for_select(@assigned, 'id', 'name', @ticket.assigned_to_id), {:include_blank => true }, {:class => "text_field input-xxlarge"} ) %>
-      </div>
+      <% end %>
+      <% if can? :see_assigend, @user %>
+        <% unless @ticket.new_record? %>
+          <% if @ticket.assigned_to.present? %>
+            <%= f.text_field :assigned_to_id, :class => 'text_field input-xxlarge', readonly: true, value: @ticket.assigned_to.name %>
+          <% else %>
+            <%= f.text_field :assigned_to_id, :class => 'text_field input-xxlarge', readonly: true, value: "Nobody has been assigned to this ticket yet" %>
+          <% end %>
+        <% end %>
+      <% end %> 
     </div>
-  <% end %> 
-
-  <% if can? :see_assigend, @user %>
-    <% unless @ticket.new_record? %>
-      <div class="control-group">
-        <%= f.label :user, "Assigned to", :class => 'control-label' %>
-        <div class="controls select">
-          <%= f.select(:assigned_to_id, options_from_collection_for_select(@assigned, 'id', 'name', @ticket.assigned_to_id), {:include_blank => true }, {:class => "text_field input-xxlarge", readonly: true} ) %>
-        </div>
-      </div>
-    <% end %>
-  <% end %> 
+  </div>
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>
