@@ -64,7 +64,7 @@
           <% if @ticket.assigned_to.present? %>
             <%= f.text_field :assigned_to_id, :class => 'text_field input-xxlarge', readonly: true, value: @ticket.assigned_to.name %>
           <% else %>
-            <%= f.text_field :assigned_to_id, :class => 'text_field input-xxlarge', readonly: true, value: "Nobody has been assigned to this ticket yet" %>
+            <%= f.text_field :assigned_to_id, :class => 'text_field input-xxlarge', disabled: true, value: "Nobody has been assigned to this ticket yet" %>
           <% end %>
         <% end %>
       <% end %> 
