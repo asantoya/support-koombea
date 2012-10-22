@@ -1,9 +1,12 @@
 <div class="filters">
   <% if can? :filer_form, @user %>
     <%= form_tag(tickets_path, method: :get, remote: true, class: "form-inline") do %>
-      <%= select_tag :user_id, options_from_collection_for_select(@clients, 'id', 'name'), :prompt => "Client", class: "input-large" %>
-      <%= select_tag :assigned_to_id, options_from_collection_for_select(@assigned, 'id', 'name'), :prompt => "Assigned to", class: "input-large" %>
-      <%= select_tag :status, options_for_select(Ticket::STATUS, params[:status]), :prompt => "Status", class: "input-medium" %>
+      <%= label_tag :user_id, "Client" %>
+      <%= select_tag :user_id, options_from_collection_for_select(@clients, 'id', 'name'), :prompt => "All", class: "input-large" %>
+      <%= label_tag :assigned_to_id, "Assigned to" %>
+      <%= select_tag :assigned_to_id, options_from_collection_for_select(@assigned, 'id', 'name'), :prompt => "All", class: "input-large" %>
+      <%= label_tag :status, "Status" %>
+      <%= select_tag :status, options_for_select(Ticket::STATUS, params[:status]), :prompt => "All", class: "input-medium" %>
       <%= submit_tag "Filter", class: "btn btn-info", name: nil %>
       <%= link_to "Reset Filters", tickets_path, class: "btn" %>
     <% end %>

@@ -54,6 +54,9 @@ img.avatar {
   }
   .btn-primary { 
     position: absolute; right: 0; top: 0; color: white !important; text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25); 
+  }
+  .form-inline {
+    select { margin: 0 10px 0 0; }
   } 
 }
 .ticket { 
