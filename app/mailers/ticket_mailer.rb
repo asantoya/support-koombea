@@ -24,7 +24,7 @@ class TicketMailer < ActionMailer::Base
     @user = user
     @user_mail = user_mail
     @url_ticket = edit_ticket_url(@ticket)
-    @url_root = root_url
+    @url = root_url
     mail(to: @user_mail, subject: "Ksupport - Status change in a ticket: #{@ticket.subject}")
   end
 
