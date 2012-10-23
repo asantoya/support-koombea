@@ -28,8 +28,6 @@
             <li><%= link_to "Log out", destroy_user_session_path, :method => :delete %></li>
           </ul>
         </div>
-      <% else %>
-        <%= link_to "Log in", new_user_session_path, :class => "btn btn-primary"  %>
       <% end %>
     </div>
   </div>
