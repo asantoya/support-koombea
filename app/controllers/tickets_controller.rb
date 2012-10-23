@@ -2,7 +2,9 @@ class TicketsController < ApplicationController
 
   def index
     @user = current_user
-    @assigned = User.where(role: "support").order("name")
+    support_user = User.where(role: "support").order("name")
+    @assigned = support_user.collect { |u| [ u.name, u.id ] }
+    @assigned.unshift(["Unassigned", 0])
     @clients = User.where(role: "client").order("name")
 
     if current_user.role == "support"
@@ -69,13 +71,14 @@ class TicketsController < ApplicationController
     end
   end
 
-  def create 
+  def create
+    
     if current_user.role == "support"
       @ticket = Ticket.new(params[:ticket])
     else
       @ticket = current_user.tickets.build(params[:ticket])      
     end
-
+    
     respond_to do |format|
       if @ticket.save
         TicketMailer.assigned_to(@ticket).deliver if @ticket.assigned_to.present?

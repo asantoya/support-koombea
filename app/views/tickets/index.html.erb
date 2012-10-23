@@ -4,7 +4,7 @@
       <%= label_tag :user_id, "Client" %>
       <%= select_tag :user_id, options_from_collection_for_select(@clients, 'id', 'name'), :prompt => "All", class: "input-large" %>
       <%= label_tag :assigned_to_id, "Assigned to" %>
-      <%= select_tag :assigned_to_id, options_from_collection_for_select(@assigned, 'id', 'name'), :prompt => "All", class: "input-large" %>
+      <%= select_tag :assigned_to_id, options_for_select(@assigned), :prompt => "All", class: "input-large" %>
       <%= label_tag :status, "Status" %>
       <%= select_tag :status, options_for_select(Ticket::STATUS, params[:status]), :prompt => "All", class: "input-medium" %>
       <%= submit_tag "Filter", class: "btn btn-info", name: nil %>

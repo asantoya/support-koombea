@@ -48,6 +48,7 @@ class Ticket < ActiveRecord::Base
   TYPE = [['Bug','bug'],['Features', 'features']]
 
   after_create :mail_new_ticket
+  before_save :check_assigned
 
   def self.search(client, assigned, status)
     tickets = order("created_at DESC").includes(:user).includes(:comments)
@@ -66,5 +67,9 @@ class Ticket < ActiveRecord::Base
     if @users.present?
       TicketMailer.new_ticket(self, @users).deliver
     end
+  end
+
+  def check_assigned
+    self.assigned_to_id = 0 if self.assigned_to_id.blank?
   end
 end
