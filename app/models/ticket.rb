@@ -79,7 +79,6 @@ class Ticket < ActiveRecord::Base
   end
 
   def self.mail_status_change(ticket, user)
-    binding.pry
     @user_mail =  ticket.user.email if  ticket.status == "ended" 
     @user_mail =  ticket.assigned_to.email if  ticket.status == "approved" ||  ticket.status == "rejected"
     unless  ticket.status == "pending" ||  ticket.status == "in_process"

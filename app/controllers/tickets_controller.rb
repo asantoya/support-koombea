@@ -71,8 +71,7 @@ class TicketsController < ApplicationController
     end
   end
 
-  def create
-    
+  def create   
     if current_user.role == "support"
       @ticket = Ticket.new(params[:ticket])
     else
