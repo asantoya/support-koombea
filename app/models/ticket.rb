@@ -49,6 +49,7 @@ class Ticket < ActiveRecord::Base
 
   after_create :mail_new_ticket
   before_save :check_assigned
+  after_update :mail_to_assigned
 
   def self.search(client, assigned, status)
     tickets = order("created_at DESC").includes(:user).includes(:comments)
@@ -71,5 +72,18 @@ class Ticket < ActiveRecord::Base
 
   def check_assigned
     self.assigned_to_id = 0 if self.assigned_to_id.blank?
+  end
+
+  def mail_to_assigned
+    TicketMailer.assigned_to(self).deliver if self.assigned_to_id_changed? && self.assigned_to.present?
+  end
+
+  def self.mail_status_change(ticket, user)
+    binding.pry
+    @user_mail =  ticket.user.email if  ticket.status == "ended" 
+    @user_mail =  ticket.assigned_to.email if  ticket.status == "approved" ||  ticket.status == "rejected"
+    unless  ticket.status == "pending" ||  ticket.status == "in_process"
+      TicketMailer.state_change(ticket, user, @user_mail).deliver if ticket.assigned_to.present?
+    end     
   end
 end

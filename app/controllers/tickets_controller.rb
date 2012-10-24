@@ -123,20 +123,10 @@ class TicketsController < ApplicationController
             @ticket.pending!
         end
         params[:ticket].delete(:status)
-      end
-
-      @ticket.assigned_to_id = params[:ticket][:assigned_to_id]
-      assigned_changed = @ticket.assigned_to_id_changed?
-
+      end      
+      
       if @ticket.update_attributes(params[:ticket])
-        TicketMailer.assigned_to(@ticket).deliver if assigned_changed == true && @ticket.assigned_to.present?
-        unless params[:ticket][:status] == @ticket.status
-          unless @ticket.status == "pending" || @ticket.status == "in_process"
-            @user_mail = @ticket.user.email if @ticket.status == "ended"
-            @user_mail = @ticket.assigned_to.email if @ticket.status == "approved" || @ticket.status == "rejected"
-            TicketMailer.state_change(@ticket, @user, @user_mail).deliver   
-          end
-        end
+        Ticket.mail_status_change(@ticket, @user) unless params[:ticket][:status] == @ticket.status
         redirect_to edit_ticket_path(@ticket), notice: 'Ticket was successfully updated.'
       end
     rescue AASM::InvalidTransition
