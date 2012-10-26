@@ -9,6 +9,7 @@ class TicketsController < ApplicationController
 
     if current_user.role == "support"
       @tickets = Ticket.search(params[:user_id], params[:assigned_to_id], params[:status]).paginate(:page => params[:page], :per_page => 10)
+      @highlight = "class='highlight'"
     else 
       @tickets = current_user.tickets.search(nil, nil, params[:status]).paginate(:page => params[:page], :per_page => 10)
     end

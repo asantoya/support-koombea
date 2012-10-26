@@ -16,7 +16,7 @@
       <% if ticket.assigned_to.present? %>
         <strong>Assigned to: </strong><%= ticket.assigned_to.name %>
       <% else %>
-        <strong>It hasn't been assigned</strong>
+        <strong <%= @highlight %>>It hasn't been assigned</strong>
       <% end %>
     </p>
 
