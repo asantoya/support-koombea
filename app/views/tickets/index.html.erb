@@ -16,7 +16,7 @@
     <i class="active"><%= link_to 'All', root_path, :class => "btn-link", :remote => true %></i>
     <i class="icon-time"><%= link_to 'Pending', tickets_path(:status => "pending"), :class => "btn-link", :remote => true %></i>
     <i class="icon-cog"><%= link_to 'In Process', tickets_path(:status => "in_process"), :class => "btn-link", :remote => true %></i>
-    <i class="icon-remove-sign"><%= link_to 'Ended', tickets_path(:status => "ended"), :class => "btn-link", :remote => true %></i>
+    <i class="icon-remove-sign"><%= link_to 'Finished', tickets_path(:status => "finished"), :class => "btn-link", :remote => true %></i>
     <i class="icon-ok-circle"><%= link_to 'Approved', tickets_path(:status => "approved"), :class => "btn-link", :remote => true %></i>
     <i class="icon-remove-circle"><%= link_to 'Rejected', tickets_path(:status => "rejected"), :class => "btn-link", :remote => true %></i>
   <% end %>

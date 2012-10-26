@@ -17,16 +17,16 @@ class Ticket < ActiveRecord::Base
   aasm :column => :status do 
     state :pending, :initial => true
     state :in_process
-    state :ended
+    state :finished
     state :approved
     state :rejected
 
     event :approve do
-      transitions :to => :approved, :from => [:ended]
+      transitions :to => :approved, :from => [:finished]
     end
 
     event :finish do
-      transitions :to => :ended, :from => [:in_process]
+      transitions :to => :finished, :from => [:in_process]
     end
 
     event :process do
@@ -34,7 +34,7 @@ class Ticket < ActiveRecord::Base
     end
 
     event :reject do
-      transitions :to => :rejected, :from => [:ended]
+      transitions :to => :rejected, :from => [:finished]
     end
 
     event :pending do
@@ -42,7 +42,7 @@ class Ticket < ActiveRecord::Base
     end    
   end
 
-  STATUS = [['Pending', 'pending'],['In Process', 'in_process'],['Ended', 'ended'],
+  STATUS = [['Pending', 'pending'],['In Process', 'in_process'],['Finished', 'finished'],
             ['Approved','approved'],['Rejected','rejected']]
 
   TYPE = [['Bug','bug'],['Features', 'features']]
@@ -79,7 +79,7 @@ class Ticket < ActiveRecord::Base
   end
 
   def self.mail_status_change(ticket, user)
-    @user_mail =  ticket.user.email if  ticket.status == "ended" 
+    @user_mail =  ticket.user.email if  ticket.status == "finished" 
     @user_mail =  ticket.assigned_to.email if  ticket.status == "approved" ||  ticket.status == "rejected"
     unless  ticket.status == "pending" ||  ticket.status == "in_process"
       TicketMailer.state_change(ticket, user, @user_mail).deliver if ticket.assigned_to.present?

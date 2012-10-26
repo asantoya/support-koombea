@@ -45,8 +45,8 @@ ActiveAdmin.register Ticket do
       f.input :user, collection: User.where(role: "client")
       f.input :subject
       f.input :description 
-      f.input :status, :as => :select, :collection => [['Process', 'process'],['Ended', 'ended'],['Approved', 'approved'],['Pending', 'pending']]
-      f.input :ticket_type, :as => :select, :collection => [['Bug', 'bug'], ['Features', 'features']]
+      f.input :status, :as => :select, :collection => Ticket::STATUS
+      f.input :ticket_type, :as => :select, :collection => Ticket::TYPE
       f.input :assigned_to, collection: User.where(role: "support")
     end
 

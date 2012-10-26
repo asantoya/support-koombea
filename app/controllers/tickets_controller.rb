@@ -110,7 +110,7 @@ class TicketsController < ApplicationController
     begin
       unless params[:ticket][:status] == @ticket.status
         case params[:ticket][:status]
-          when 'ended'
+          when 'finished'
             @ticket.finish!
           when 'rejected'
             @ticket.reject!

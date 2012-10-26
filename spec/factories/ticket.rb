@@ -6,8 +6,8 @@ FactoryGirl.define do
   factory :ticket do 
     subject
     description "Test description"
-    status "Ended"
-    ticket_type "Bug"
+    status "finished"
+    ticket_type "bug"
     user
   end
 end

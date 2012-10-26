@@ -30,9 +30,9 @@ describe Ticket do
   it "returns a sorted array of results that match" do
 
     ticket = FactoryGirl.create(:ticket, status: "in_process")
-    ticket1 = FactoryGirl.create(:ticket, status: "ended")
-    ticket2 = FactoryGirl.create(:ticket, status: "ended")
+    ticket1 = FactoryGirl.create(:ticket, status: "finished")
+    ticket2 = FactoryGirl.create(:ticket, status: "finished")
 
-    Ticket.search(nil, nil, "ended").sort.should == [ticket1, ticket2]
+    Ticket.search(nil, nil, "finished").sort.should == [ticket1, ticket2]
   end
 end
