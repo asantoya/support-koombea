@@ -31,6 +31,7 @@ $(document).on("ready", function () {
     regexp = new RegExp($(this).data('id'), 'g')
     $(this).before($(this).data('fields').replace(regexp, time))
     event.preventDefault()
+    $(this).html("Add more files")
   })
   $(".filters i a").on("click", function  () {
     $(".filters i").removeClass('active');
