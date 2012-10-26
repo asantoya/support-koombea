@@ -14,9 +14,12 @@ class TicketMailer < ActionMailer::Base
     @comment = comment
     @users = [@comment.ticket.user.email]
     @users << @comment.ticket.assigned_to.email if @comment.ticket.assigned_to.present?
+    @comment.ticket.comments.each do |c|
+      @users << c.user.email
+    end
     @url_ticket = edit_ticket_url(@comment.ticket)
     @url = root_url
-    mail(to: @users, subject: "Ksupport - New Comment: #{@comment.ticket.subject}")
+    mail(to: @users.uniq, subject: "Ksupport - New Comment: #{@comment.ticket.subject}")
   end
 
   def state_change(ticket, user, user_mail)
