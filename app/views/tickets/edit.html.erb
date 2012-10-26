@@ -7,7 +7,7 @@
     <% unless @count_comments == 0 %>
       <div class="alert-info alert-count-comments">
         <button type="button" class="close" data-dismiss="alert">×</button>
-        <strong>Info! </strong><%= link_to "You have " + pluralize(@count_comments, "comment") + " unread" , {controller: "comments", action: "mark_read_comments", ticket_id: @ticket}, remote: true, class: "scrollTo" %>
+        <strong>Info! </strong>You have <%= pluralize(@count_comments, "unread comment") %> <%= link_to '"Click here to mark them as read"', {controller: "comments", action: "mark_read_comments", ticket_id: @ticket}, remote: true, class: "scrollTo" %>
       </div>
     <% end %>
     <%= render 'form' %>
